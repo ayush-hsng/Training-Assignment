@@ -10,8 +10,10 @@ import UIKit
 class MovieArchiveViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var archiveTableView: UITableView!
+    let basePath = "https://image.tmdb.org/t/p/w500/"
     
     var moviesArchive:[Movie] = [Movie]()
+    var selectedRow: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +48,12 @@ class MovieArchiveViewController: UIViewController, UITableViewDataSource, UITab
             return cell
         }
         
-        let basePath = "https://image.tmdb.org/t/p/w500/"
+        
         
         let movieImagePath = basePath + moviesArchive[indexPath.row].poster_path
         
         cell.movieTitleLabel.text = moviesArchive[indexPath.row].title
         cell.movieOverviewLabel.text = moviesArchive[indexPath.row].overview
-        
-        
-        
         
         DataManager.getMoviePosterRequest(from: movieImagePath) { (image) in
             
@@ -66,21 +65,27 @@ class MovieArchiveViewController: UIViewController, UITableViewDataSource, UITab
                     let defaultImageName = "photo"
                     let defaultImage = UIImage(systemName: defaultImageName)
                     cell.moviePosterImageView.image = defaultImage
-                    
-                    
                 }
             }
             
         }
-        
-        
         return cell
-        
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedRow = indexPath.row
+        performSegue(withIdentifier: "CheckMovieSegue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CheckMovieSegue" {
+                if let destinationVC = segue.destination as? MovieDetailsViewController {
+                    destinationVC.movie = moviesArchive[selectedRow]
+                    destinationVC.basePath = basePath
+                }
+            }
+    }
+    
 
     /*
     // MARK: - Navigation

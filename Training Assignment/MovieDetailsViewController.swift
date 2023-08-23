@@ -8,9 +8,42 @@
 import UIKit
 
 class MovieDetailsViewController: UIViewController {
+    var basePath: String!
+    var movie: Movie!
+    
+    @IBOutlet weak var moviePosterImageView: UIImageView!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var movieRatingLebel: UILabel!
+    @IBOutlet weak var popularityLabel: UILabel!
+    @IBOutlet weak var movieOverViewLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = movie.title
+        self.releaseDateLabel.text = movie.release_date
+        self.movieRatingLebel.text = String(movie.vote_average)
+        self.popularityLabel.text = String(movie.popularity)
+        self.movieOverViewLabel.text = movie.overview
+        
+        let movieImagePath = basePath + movie.poster_path
+        
+        
+        DataManager.getMoviePosterRequest(from: movieImagePath) { (image) in
+            
+            DispatchQueue.main.async {
+                self.moviePosterImageView.layer.cornerRadius = 20
+                if let image = image {
+                    self.moviePosterImageView.image = image
+                }else {
+                    let defaultImageName = "photo"
+                    let defaultImage = UIImage(systemName: defaultImageName)
+                    self.moviePosterImageView.image = defaultImage
+                }
+            }
+            
+        }
 
         // Do any additional setup after loading the view.
     }
