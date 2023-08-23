@@ -8,6 +8,11 @@
 import UIKit
 
 class MovieArchiveTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var moviePosterImageView: UIImageView!
+    @IBOutlet weak var movieTitleLabel: UILabel!
+    @IBOutlet weak var movieDescriptionLabel: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

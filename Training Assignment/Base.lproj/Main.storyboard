@@ -26,7 +26,45 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MOZ-Gh-a5d" id="jGm-ii-Cjg">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="127"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Godzilla vs. Kong" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2u-Pg-oVl">
+                                                    <rect key="frame" x="72" y="18.999999999999996" width="293" height="33.666666666666657"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xc7-ey-eym">
+                                                    <rect key="frame" x="4" y="4" width="60" height="119"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="80" id="Mek-eF-fuQ"/>
+                                                        <constraint firstAttribute="width" constant="60" id="vMk-fh-zje"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JH6-wW-3ef">
+                                                    <rect key="frame" x="72" y="60.666666666666657" width="293" height="48"/>
+                                                    <string key="text">In a city where fire, water, land and air residents live together, a fiery young woman and a go-with-the-flow guy will discover something elemental: how much they have in common.</string>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xc7-ey-eym" firstAttribute="leading" secondItem="jGm-ii-Cjg" secondAttribute="leading" constant="4" id="455-ss-5mi"/>
+                                                <constraint firstItem="JH6-wW-3ef" firstAttribute="leading" secondItem="xc7-ey-eym" secondAttribute="trailing" constant="8" id="7mL-uO-iwU"/>
+                                                <constraint firstItem="JH6-wW-3ef" firstAttribute="top" secondItem="Q2u-Pg-oVl" secondAttribute="bottom" constant="8" id="E7P-Wu-HYb"/>
+                                                <constraint firstItem="xc7-ey-eym" firstAttribute="top" secondItem="jGm-ii-Cjg" secondAttribute="top" constant="4" id="NOj-jN-68F"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Q2u-Pg-oVl" secondAttribute="trailing" constant="8" id="ddD-gs-4dx"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="JH6-wW-3ef" secondAttribute="trailing" constant="8" id="g4T-Kj-VUp"/>
+                                                <constraint firstItem="Q2u-Pg-oVl" firstAttribute="top" secondItem="jGm-ii-Cjg" secondAttribute="topMargin" constant="8" id="gkZ-Gz-pNe"/>
+                                                <constraint firstAttribute="bottom" secondItem="xc7-ey-eym" secondAttribute="bottom" constant="4" id="hkc-x2-5cw"/>
+                                                <constraint firstItem="Q2u-Pg-oVl" firstAttribute="leading" secondItem="xc7-ey-eym" secondAttribute="trailing" constant="8" id="t25-tI-tIz"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="movieDescriptionLabel" destination="JH6-wW-3ef" id="9n1-r3-waf"/>
+                                            <outlet property="moviePosterImageView" destination="xc7-ey-eym" id="wMY-DB-Dxi"/>
+                                            <outlet property="movieTitleLabel" destination="Q2u-Pg-oVl" id="TMW-Ei-hwR"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
