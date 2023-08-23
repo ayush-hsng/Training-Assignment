@@ -1,5 +1,5 @@
 //
-//  MovieArchiveViewController.swift
+//  MovieDetailsViewController.swift
 //  Training Assignment
 //
 //  Created by Ayush Kumar Sinha on 23/08/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieArchiveViewController: UIViewController {
+class MovieDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +15,6 @@ class MovieArchiveViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
     /*
     // MARK: - Navigation
 

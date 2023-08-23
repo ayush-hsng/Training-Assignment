@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="127" id="MOZ-Gh-a5d" customClass="MovieArchiveTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="archiveCell" rowHeight="127" id="MOZ-Gh-a5d" customClass="MovieArchiveTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MOZ-Gh-a5d" id="jGm-ii-Cjg">
@@ -61,9 +61,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="movieDescriptionLabel" destination="JH6-wW-3ef" id="9n1-r3-waf"/>
-                                            <outlet property="moviePosterImageView" destination="xc7-ey-eym" id="wMY-DB-Dxi"/>
-                                            <outlet property="movieTitleLabel" destination="Q2u-Pg-oVl" id="TMW-Ei-hwR"/>
+                                            <outlet property="movieOverviewLabel" destination="JH6-wW-3ef" id="6sQ-9t-KrI"/>
+                                            <outlet property="moviePosterImageView" destination="xc7-ey-eym" id="FJw-F1-uyF"/>
+                                            <outlet property="movieTitleLabel" destination="Q2u-Pg-oVl" id="a2c-Sd-KDe"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -80,6 +80,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="2lD-za-nkF"/>
                     <connections>
+                        <outlet property="archiveTableView" destination="p9U-Ns-2yU" id="ud9-py-eZA"/>
                         <segue destination="beE-c1-eQc" kind="showDetail" identifier="CheckMovieSegue" id="9aW-Dw-XuU"/>
                     </connections>
                 </viewController>
