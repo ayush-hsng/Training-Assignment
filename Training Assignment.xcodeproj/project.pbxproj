@@ -15,6 +15,7 @@
 		EB61E4E92A95C9BC00017AF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB61E4E72A95C9BC00017AF9 /* LaunchScreen.storyboard */; };
 		EB61E4F12A95CD2200017AF9 /* MovieArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E4F02A95CD2200017AF9 /* MovieArchiveViewController.swift */; };
 		EB61E4F32A95CD5400017AF9 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E4F22A95CD5400017AF9 /* MovieDetailsViewController.swift */; };
+		EB61E4F52A95CFA000017AF9 /* MovieArchiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E4F42A95CFA000017AF9 /* MovieArchiveTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		EB61E4EA2A95C9BC00017AF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB61E4F02A95CD2200017AF9 /* MovieArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieArchiveViewController.swift; sourceTree = "<group>"; };
 		EB61E4F22A95CD5400017AF9 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
+		EB61E4F42A95CFA000017AF9 /* MovieArchiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieArchiveTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				EB61E4F02A95CD2200017AF9 /* MovieArchiveViewController.swift */,
 				EB61E4F22A95CD5400017AF9 /* MovieDetailsViewController.swift */,
 				EB61E4E22A95C9BB00017AF9 /* Main.storyboard */,
+				EB61E4F42A95CFA000017AF9 /* MovieArchiveTableViewCell.swift */,
 				EB61E4E52A95C9BC00017AF9 /* Assets.xcassets */,
 				EB61E4E72A95C9BC00017AF9 /* LaunchScreen.storyboard */,
 				EB61E4EA2A95C9BC00017AF9 /* Info.plist */,
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB61E4F32A95CD5400017AF9 /* MovieDetailsViewController.swift in Sources */,
+				EB61E4F52A95CFA000017AF9 /* MovieArchiveTableViewCell.swift in Sources */,
 				EB61E4F12A95CD2200017AF9 /* MovieArchiveViewController.swift in Sources */,
 				EB61E4E12A95C9BB00017AF9 /* ViewController.swift in Sources */,
 				EB61E4DD2A95C9BB00017AF9 /* AppDelegate.swift in Sources */,
