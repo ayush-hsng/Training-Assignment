@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="archiveCell" rowHeight="127" id="MOZ-Gh-a5d" customClass="MovieArchiveTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArchiveCell" rowHeight="127" id="MOZ-Gh-a5d" customClass="MovieArchiveTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MOZ-Gh-a5d" id="jGm-ii-Cjg">
@@ -28,20 +28,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Godzilla vs. Kong" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2u-Pg-oVl">
-                                                    <rect key="frame" x="72" y="18.999999999999996" width="293" height="33.666666666666657"/>
+                                                    <rect key="frame" x="92" y="18.999999999999996" width="273" height="33.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xc7-ey-eym">
-                                                    <rect key="frame" x="4" y="4" width="60" height="119"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="xc7-ey-eym">
+                                                    <rect key="frame" x="4" y="4" width="80" height="119"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="80" id="Mek-eF-fuQ"/>
-                                                        <constraint firstAttribute="width" constant="60" id="vMk-fh-zje"/>
+                                                        <constraint firstAttribute="height" constant="120" id="Mek-eF-fuQ"/>
+                                                        <constraint firstAttribute="width" constant="80" id="vMk-fh-zje"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JH6-wW-3ef">
-                                                    <rect key="frame" x="72" y="60.666666666666657" width="293" height="48"/>
+                                                    <rect key="frame" x="92" y="60.666666666666657" width="273" height="48"/>
                                                     <string key="text">In a city where fire, water, land and air residents live together, a fiery young woman and a go-with-the-flow guy will discover something elemental: how much they have in common.</string>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -61,9 +61,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="movieOverviewLabel" destination="JH6-wW-3ef" id="6sQ-9t-KrI"/>
-                                            <outlet property="moviePosterImageView" destination="xc7-ey-eym" id="FJw-F1-uyF"/>
-                                            <outlet property="movieTitleLabel" destination="Q2u-Pg-oVl" id="a2c-Sd-KDe"/>
+                                            <outlet property="movieOverviewLabel" destination="JH6-wW-3ef" id="3Pu-w8-ITA"/>
+                                            <outlet property="moviePosterImageView" destination="xc7-ey-eym" id="Zwl-Q3-gvv"/>
+                                            <outlet property="movieTitleLabel" destination="Q2u-Pg-oVl" id="P5I-mr-swn"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -201,6 +201,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="image" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
