@@ -11,6 +11,7 @@ import UIKit
 class DataManager {
     
     static let session = URLSession.shared
+    static let posterImageBasePath = "https://image.tmdb.org/t/p/w500/"
     
     static func getPopularMoviesRequest(completionhandler: @escaping ([Movie]?)->(Void)) {
         let headers = ["accept": "application/json"]
@@ -33,18 +34,13 @@ class DataManager {
             }
             
             let responseData = try? JSONDecoder().decode(PopularMovieResult.self, from: jsonData)
-
             completionhandler(responseData?.results)
-            
         }.resume()
-        
-        
-        
-        
     }
     
-    static func getMoviePosterRequest(from urlString: String,completionHandler: @escaping (UIImage?) -> (Void)){
+    static func getMoviePosterRequest(from imageFile: String,completionHandler: @escaping (UIImage?) -> (Void)){
         
+        let urlString = posterImageBasePath + imageFile
         let url = URL(string: urlString)!
         
         session.dataTask(with: URLRequest(url: url)) { (data,response,error) in

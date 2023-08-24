@@ -10,7 +10,6 @@ import UIKit
 class MovieArchiveViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var archiveTableView: UITableView!
-    let basePath = "https://image.tmdb.org/t/p/w500/"
     
     var moviesArchive:[Movie] = [Movie]()
     var selectedRow: Int!
@@ -48,14 +47,10 @@ class MovieArchiveViewController: UIViewController, UITableViewDataSource, UITab
             return cell
         }
         
-        
-        
-        let movieImagePath = basePath + moviesArchive[indexPath.row].poster_path
-        
         cell.movieTitleLabel.text = moviesArchive[indexPath.row].title
         cell.movieOverviewLabel.text = moviesArchive[indexPath.row].overview
         
-        DataManager.getMoviePosterRequest(from: movieImagePath) { (image) in
+        DataManager.getMoviePosterRequest(from: moviesArchive[indexPath.row].poster_path) { (image) in
             
             DispatchQueue.main.async {
                 cell.moviePosterImageView.layer.cornerRadius = 8
@@ -81,7 +76,6 @@ class MovieArchiveViewController: UIViewController, UITableViewDataSource, UITab
         if segue.identifier == "CheckMovieSegue" {
                 if let destinationVC = segue.destination as? MovieDetailsViewController {
                     destinationVC.movie = moviesArchive[selectedRow]
-                    destinationVC.basePath = basePath
                 }
             }
     }

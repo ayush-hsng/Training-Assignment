@@ -8,7 +8,6 @@
 import UIKit
 
 class MovieDetailsViewController: UIViewController {
-    var basePath: String!
     var movie: Movie!
     
     @IBOutlet weak var moviePosterImageView: UIImageView!
@@ -26,11 +25,8 @@ class MovieDetailsViewController: UIViewController {
         self.movieRatingLebel.text = String(movie.vote_average)
         self.popularityLabel.text = String(movie.popularity)
         self.movieOverViewLabel.text = movie.overview
-        
-        let movieImagePath = basePath + movie.poster_path
-        
-        
-        DataManager.getMoviePosterRequest(from: movieImagePath) { (image) in
+    
+        DataManager.getMoviePosterRequest(from: movie.poster_path) { (image) in
             
             DispatchQueue.main.async {
                 self.moviePosterImageView.layer.cornerRadius = 20
