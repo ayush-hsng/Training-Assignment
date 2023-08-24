@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieArchiveViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MovieArchiveViewController: UIViewController {
     
     @IBOutlet weak var archiveTableView: UITableView!
     
@@ -35,6 +35,18 @@ class MovieArchiveViewController: UIViewController, UITableViewDataSource, UITab
 
         // Do any additional setup after loading the view.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CheckMovieSegue" {
+                if let destinationVC = segue.destination as? MovieDetailsViewController {
+                    destinationVC.movie = moviesArchive[selectedRow]
+                }
+            }
+    }
+
+}
+
+extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return moviesArchive.count
@@ -71,24 +83,4 @@ class MovieArchiveViewController: UIViewController, UITableViewDataSource, UITab
         self.selectedRow = indexPath.row
         performSegue(withIdentifier: "CheckMovieSegue", sender: nil)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CheckMovieSegue" {
-                if let destinationVC = segue.destination as? MovieDetailsViewController {
-                    destinationVC.movie = moviesArchive[selectedRow]
-                }
-            }
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
