@@ -22,14 +22,11 @@ class MovieArchiveViewController: UIViewController {
         
         
         JsonDataManager.getPopularMoviesRequest { (movieList) in
-            
             DispatchQueue.main.async {
-                
                 if let movieList = movieList {
                     self.moviesArchive = movieList
                     self.archiveTableView.reloadData()
                 }
-                
             }
         }
 

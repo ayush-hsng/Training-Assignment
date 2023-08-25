@@ -27,14 +27,12 @@ class MovieDetailsViewController: UIViewController {
         self.movieOverViewLabel.text = movie.overview
     
         ImageDataManager.getMoviePosterRequest(from: movie.poster_path) { (image) in
-            
             DispatchQueue.main.async {
                 self.moviePosterImageView.layer.cornerRadius = 20
                 self.moviePosterImageView.image = image
             }
-            
         }
-
+        
         // Do any additional setup after loading the view.
     }
     
