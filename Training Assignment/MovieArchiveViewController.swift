@@ -21,7 +21,7 @@ class MovieArchiveViewController: UIViewController {
         self.archiveTableView.dataSource = self
         
         
-        DataManager.getPopularMoviesRequest { (movieList) in
+        JsonDataManager.getPopularMoviesRequest { (movieList) in
             
             DispatchQueue.main.async {
                 
@@ -62,17 +62,11 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
         cell.movieTitleLabel.text = moviesArchive[indexPath.row].title
         cell.movieOverviewLabel.text = moviesArchive[indexPath.row].overview
         
-        DataManager.getMoviePosterRequest(from: moviesArchive[indexPath.row].poster_path) { (image) in
+        ImageDataManager.getMoviePosterRequest(from: moviesArchive[indexPath.row].poster_path) { (image) in
             
             DispatchQueue.main.async {
                 cell.moviePosterImageView.layer.cornerRadius = 8
-                if let image = image {
-                    cell.moviePosterImageView.image = image
-                }else {
-                    let defaultImageName = "photo"
-                    let defaultImage = UIImage(systemName: defaultImageName)
-                    cell.moviePosterImageView.image = defaultImage
-                }
+                cell.moviePosterImageView.image = image
             }
             
         }

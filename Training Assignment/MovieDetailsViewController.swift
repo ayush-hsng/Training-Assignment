@@ -26,17 +26,11 @@ class MovieDetailsViewController: UIViewController {
         self.popularityLabel.text = String(movie.popularity)
         self.movieOverViewLabel.text = movie.overview
     
-        DataManager.getMoviePosterRequest(from: movie.poster_path) { (image) in
+        ImageDataManager.getMoviePosterRequest(from: movie.poster_path) { (image) in
             
             DispatchQueue.main.async {
                 self.moviePosterImageView.layer.cornerRadius = 20
-                if let image = image {
-                    self.moviePosterImageView.image = image
-                }else {
-                    let defaultImageName = "photo"
-                    let defaultImage = UIImage(systemName: defaultImageName)
-                    self.moviePosterImageView.image = defaultImage
-                }
+                self.moviePosterImageView.image = image
             }
             
         }

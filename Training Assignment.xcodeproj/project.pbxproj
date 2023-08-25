@@ -19,6 +19,8 @@
 		EB61E5012A96010500017AF9 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E5002A96010500017AF9 /* DataManager.swift */; };
 		EB61E5032A96031A00017AF9 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E5022A96031A00017AF9 /* HTTPMethods.swift */; };
 		EB61E5052A960AAD00017AF9 /* MovieArchiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E5042A960AAD00017AF9 /* MovieArchiveTableViewCell.swift */; };
+		EBAFADEA2A988D0D00B65FEF /* JsonDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAFADE92A988D0D00B65FEF /* JsonDataManager.swift */; };
+		EBAFADEC2A988D1B00B65FEF /* ImageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAFADEB2A988D1B00B65FEF /* ImageDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		EB61E5002A96010500017AF9 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		EB61E5022A96031A00017AF9 /* HTTPMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
 		EB61E5042A960AAD00017AF9 /* MovieArchiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieArchiveTableViewCell.swift; sourceTree = "<group>"; };
+		EBAFADE92A988D0D00B65FEF /* JsonDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataManager.swift; sourceTree = "<group>"; };
+		EBAFADEB2A988D1B00B65FEF /* ImageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,8 @@
 				EB61E4FA2A95F31100017AF9 /* PopularMovieResult.swift */,
 				EB61E5022A96031A00017AF9 /* HTTPMethods.swift */,
 				EB61E5002A96010500017AF9 /* DataManager.swift */,
+				EBAFADE92A988D0D00B65FEF /* JsonDataManager.swift */,
+				EBAFADEB2A988D1B00B65FEF /* ImageDataManager.swift */,
 				EB61E4F82A95EEDD00017AF9 /* MovieDataModel.swift */,
 			);
 			path = DataModels;
@@ -166,6 +172,7 @@
 			files = (
 				EB61E5032A96031A00017AF9 /* HTTPMethods.swift in Sources */,
 				EB61E5052A960AAD00017AF9 /* MovieArchiveTableViewCell.swift in Sources */,
+				EBAFADEC2A988D1B00B65FEF /* ImageDataManager.swift in Sources */,
 				EB61E4F32A95CD5400017AF9 /* MovieDetailsViewController.swift in Sources */,
 				EB61E4F92A95EEDD00017AF9 /* MovieDataModel.swift in Sources */,
 				EB61E4FB2A95F31100017AF9 /* PopularMovieResult.swift in Sources */,
@@ -173,6 +180,7 @@
 				EB61E4DD2A95C9BB00017AF9 /* AppDelegate.swift in Sources */,
 				EB61E4FF2A95FEA900017AF9 /* MovieArchiveViewController.swift in Sources */,
 				EB61E4DF2A95C9BB00017AF9 /* SceneDelegate.swift in Sources */,
+				EBAFADEA2A988D0D00B65FEF /* JsonDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
