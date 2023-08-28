@@ -13,6 +13,22 @@ class MovieArchiveTableViewCell: UITableViewCell {
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieOverviewLabel: UILabel!
     
+    func setCellElements(from movie: Movie){
+        movieTitleLabel.text = movie.title
+        movieOverviewLabel.text = movie.overview
+        ImageDataManager.getMoviePosterRequest(from: movie.poster_path) { (image) in
+            
+            DispatchQueue.main.async {
+                
+                self.moviePosterImageView.image = image
+            }
+            
+        }
+    }
+    
+    func customizeCell(){
+        self.moviePosterImageView.layer.cornerRadius = 8
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

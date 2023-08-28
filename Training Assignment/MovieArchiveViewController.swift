@@ -56,17 +56,9 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
             return cell
         }
         
-        cell.movieTitleLabel.text = moviesArchive[indexPath.row].title
-        cell.movieOverviewLabel.text = moviesArchive[indexPath.row].overview
-        cell.moviePosterImageView.image = nil
-        ImageDataManager.getMoviePosterRequest(from: moviesArchive[indexPath.row].poster_path) { (image) in
-            
-            DispatchQueue.main.async {
-                cell.moviePosterImageView.layer.cornerRadius = 8
-                cell.moviePosterImageView.image = image
-            }
-            
-        }
+        cell.setCellElements(from: moviesArchive[indexPath.row])
+        cell.customizeCell()
+        
         return cell
     }
     
