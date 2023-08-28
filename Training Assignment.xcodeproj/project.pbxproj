@@ -49,6 +49,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB273F9A2A9CDEFF00C26507 /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				EB273F972A9CDA1400C26507 /* AppConstants.swift */,
+				EBAFADE92A988D0D00B65FEF /* JsonDataManager.swift */,
+				EBAFADEB2A988D1B00B65FEF /* ImageDataManager.swift */,
+				EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */,
+			);
+			path = DataManagers;
+			sourceTree = "<group>";
+		};
 		EB61E4D02A95C9BB00017AF9 = {
 			isa = PBXGroup;
 			children = (
@@ -74,23 +85,12 @@
 				EB61E4F22A95CD5400017AF9 /* MovieDetailsViewController.swift */,
 				EB61E4FE2A95FEA900017AF9 /* MovieArchiveViewController.swift */,
 				EB61E4DE2A95C9BB00017AF9 /* SceneDelegate.swift */,
-				EB61E4FC2A95F3B500017AF9 /* DataModels */,
+				EB273F9A2A9CDEFF00C26507 /* DataManagers */,
 				EB61E4E52A95C9BC00017AF9 /* Assets.xcassets */,
 				EB61E4E72A95C9BC00017AF9 /* LaunchScreen.storyboard */,
 				EB61E4EA2A95C9BC00017AF9 /* Info.plist */,
 			);
 			path = "Training Assignment";
-			sourceTree = "<group>";
-		};
-		EB61E4FC2A95F3B500017AF9 /* DataModels */ = {
-			isa = PBXGroup;
-			children = (
-				EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */,
-				EB273F972A9CDA1400C26507 /* AppConstants.swift */,
-				EBAFADE92A988D0D00B65FEF /* JsonDataManager.swift */,
-				EBAFADEB2A988D1B00B65FEF /* ImageDataManager.swift */,
-			);
-			path = DataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
