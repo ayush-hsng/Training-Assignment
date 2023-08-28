@@ -1,8 +1,8 @@
 //
-//  MovieDataModel.swift
+//  MovieDBAPIDataModels.swift
 //  Training Assignment
 //
-//  Created by Ayush Kumar Sinha on 23/08/23.
+//  Created by Ayush Kumar Sinha on 28/08/23.
 //
 
 import Foundation
@@ -16,4 +16,7 @@ struct Movie: Codable {
     var poster_path: String
 }
 
+struct PopularMovieResult: Codable {
+    var results: [Movie]
+}
 

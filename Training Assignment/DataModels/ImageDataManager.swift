@@ -10,7 +10,6 @@ import UIKit
 
 class ImageDataManager {
     static func getMoviePosterRequest(from imageFile: String,completionHandler: @escaping (UIImage) -> (Void)){
-        let posterImageBasePath = "https://image.tmdb.org/t/p/w500/"
         let urlString = posterImageBasePath + imageFile
         let url = URL(string: urlString)!
         

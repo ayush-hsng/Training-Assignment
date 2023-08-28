@@ -17,17 +17,19 @@ class MovieArchiveTableViewCell: UITableViewCell {
         movieTitleLabel.text = movie.title
         movieOverviewLabel.text = movie.overview
         ImageDataManager.getMoviePosterRequest(from: movie.poster_path) { (image) in
-            
             DispatchQueue.main.async {
-                
                 self.moviePosterImageView.image = image
             }
-            
         }
     }
     
     func customizeCell(){
-        self.moviePosterImageView.layer.cornerRadius = 8
+        
+        //setting corner radius 5% of image height
+        let posterHeight = self.moviePosterImageView.frame.height
+        let cornerRadius = posterHeight / 20
+        self.moviePosterImageView.layer.cornerRadius = cornerRadius
+        
     }
 
     override func awakeFromNib() {
