@@ -8,8 +8,11 @@
 import Foundation
 
 class JsonDataManager {
+    static let shared = JsonDataManager()
     
-    static func getPopularMoviesRequest(completionhandler: @escaping ([Movie]?)->(Void)) {
+    private init() {    }
+    
+    func getPopularMoviesRequest(completionhandler: @escaping ([Movie]?)->(Void)) {
         let headers = ["accept": "application/json"]
         
         let url = URL(string: apiUrlString)!

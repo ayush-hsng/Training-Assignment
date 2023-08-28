@@ -21,7 +21,7 @@ class MovieArchiveViewController: UIViewController {
         self.archiveTableView.dataSource = self
         
         
-        JsonDataManager.getPopularMoviesRequest { (movieList) in
+        JsonDataManager.shared.getPopularMoviesRequest { (movieList) in
             DispatchQueue.main.async {
                 if let movieList = movieList {
                     self.moviesArchive = movieList

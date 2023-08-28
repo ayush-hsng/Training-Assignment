@@ -26,7 +26,7 @@ class MovieDetailsViewController: UIViewController {
         self.popularityLabel.text = String(movie.popularity)
         self.movieOverViewLabel.text = movie.overview
     
-        ImageDataManager.getMoviePosterRequest(from: movie.poster_path) { (image) in
+        ImageDataManager.shared.getMoviePosterRequest(from: movie.poster_path) { (image) in
             DispatchQueue.main.async {
                 self.moviePosterImageView.layer.cornerRadius = 20
                 self.moviePosterImageView.image = image
