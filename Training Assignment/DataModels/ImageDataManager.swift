@@ -16,26 +16,30 @@ class ImageDataManager {
         
         URLSession.shared.dataTask(with: URLRequest(url: url)) { (data,response,error) in
             guard error == nil, let imageData = data else{
-                completionHandler(getImage())
+                completionHandler(getPlaceholderImage())
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                 print("Status code not 200")
-                completionHandler(getImage())
+                completionHandler(getPlaceholderImage())
                 return
             }
             completionHandler(getImage(from: UIImage(data: imageData)))
         }.resume()
     }
     
+    static func getPlaceholderImage() -> UIImage{
+        let defaultImageName = "photo"
+        let defaultImage = UIImage(systemName: defaultImageName)!
+        return defaultImage
+    }
+    
     static func getImage(from optionalImage: UIImage? = nil) -> UIImage{
         if let unwrappedImage = optionalImage {
             return unwrappedImage
         }else {
-            let defaultImageName = "photo"
-            let defaultImage = UIImage(systemName: defaultImageName)!
-            return defaultImage
+            return getPlaceholderImage()
         }
     }
 }

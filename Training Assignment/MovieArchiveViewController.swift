@@ -58,7 +58,7 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
         
         cell.movieTitleLabel.text = moviesArchive[indexPath.row].title
         cell.movieOverviewLabel.text = moviesArchive[indexPath.row].overview
-        
+        cell.moviePosterImageView.image = nil
         ImageDataManager.getMoviePosterRequest(from: moviesArchive[indexPath.row].poster_path) { (image) in
             
             DispatchQueue.main.async {
@@ -73,5 +73,6 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedRow = indexPath.row
         performSegue(withIdentifier: "CheckMovieSegue", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
