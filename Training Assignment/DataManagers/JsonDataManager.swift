@@ -12,13 +12,13 @@ class JsonDataManager {
     
     private init() {    }
     
-    func getPopularMoviesRequest(completionhandler: @escaping ([APIMovie]?)->(Void)) {
+    func getPopularMoviesRequest(completionhandler: @escaping (PopularMovieResult?)->(Void)) {
         let headers = ["accept": "application/json"]
         
         let url = URL(string: apiUrlString)!
         
         var request = URLRequest(url: url)
-        request.httpMethod = httpMethod.GET.rawValue
+        request.httpMethod = HTTPMethod.GET.rawValue
         request.allHTTPHeaderFields = headers
         
         URLSession.shared.dataTask(with: request) { (data,response,error) in
@@ -30,9 +30,8 @@ class JsonDataManager {
                 print("Status code not 200")
                 return
             }
-            
             let responseData = try? JSONDecoder().decode(PopularMovieResult.self, from: jsonData)
-            completionhandler(responseData?.results)
+            completionhandler(responseData)
         }.resume()
     }
 }

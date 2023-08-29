@@ -27,8 +27,8 @@ class MovieDetailsViewController: UIViewController {
     
     func setViewElements(){
         self.title = self.movieData.movieInfo.title
-        self.releaseDateLabel.text = self.movieData.movieInfo.release_date
-        self.movieRatingLebel.text = String(self.movieData.movieInfo.vote_average)
+        self.releaseDateLabel.text = self.movieData.movieInfo.releaseDate
+        self.movieRatingLebel.text = String(self.movieData.movieInfo.rating)
         self.popularityLabel.text = String(self.movieData.movieInfo.popularity)
         self.movieOverViewLabel.text = self.movieData.movieInfo.overview
         self.moviePosterImageView.image = self.movieData.moviePoster

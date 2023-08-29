@@ -11,7 +11,7 @@ class MovieArchiveViewController: UIViewController {
     
     @IBOutlet weak var archiveTableView: UITableView!
     
-    var moviesArchive = [APIMovie]()
+    var viewDataModel : MovieArchiveViewDataModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,15 +19,9 @@ class MovieArchiveViewController: UIViewController {
         self.archiveTableView.delegate = self
         self.archiveTableView.dataSource = self
         
-        
-        JsonDataManager.shared.getPopularMoviesRequest { (movieList) in
-            DispatchQueue.main.async {
-                if let movieList = movieList {
-                    self.moviesArchive = movieList
-                    self.archiveTableView.reloadData()
-                }
-            }
-        }
+        viewDataModel = MovieArchiveViewDataModel()
+        viewDataModel.subscribe(observer: self)
+        viewDataModel.fetchPopularMovies()
 
         // Do any additional setup after loading the view.
     }
@@ -47,7 +41,7 @@ class MovieArchiveViewController: UIViewController {
 extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return moviesArchive.count
+        return viewDataModel.getPopularMovieCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,7 +51,7 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
             return cell
         }
         
-        cell.setCellElements(from: moviesArchive[indexPath.row])
+        cell.setCellElements(from: viewDataModel.getPopularMovie(by: indexPath.row))
         
         return cell
     }
@@ -70,8 +64,17 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
             poster = ImageDataManager.shared.getPlaceholderImage()
         }
         
-        let sender = AppMovie(info: moviesArchive[indexPath.row], poster: poster)
+        let sender = AppMovie(info: viewDataModel.getPopularMovie(by: indexPath.row), poster: poster)
         performSegue(withIdentifier: "CheckMovieSegue", sender: sender)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension MovieArchiveViewController: Observer {
+    func notifyMeWhenDone() {
+        
+        DispatchQueue.main.async {
+            self.archiveTableView.reloadData()
+        }
     }
 }

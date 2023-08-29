@@ -10,6 +10,9 @@
 		EB273F962A9CD94500C26507 /* MovieDBAPIDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */; };
 		EB273F982A9CDA1400C26507 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273F972A9CDA1400C26507 /* AppConstants.swift */; };
 		EB273FA22A9DF46E00C26507 /* AppMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273FA12A9DF46E00C26507 /* AppMovie.swift */; };
+		EB273FA42A9E114E00C26507 /* MovieArchiveViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273FA32A9E114E00C26507 /* MovieArchiveViewDataModel.swift */; };
+		EB273FA62A9E11AB00C26507 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273FA52A9E11AB00C26507 /* Observer.swift */; };
+		EB273FA82A9E125200C26507 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273FA72A9E125200C26507 /* Subject.swift */; };
 		EB61E4DD2A95C9BB00017AF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E4DC2A95C9BB00017AF9 /* AppDelegate.swift */; };
 		EB61E4DF2A95C9BB00017AF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E4DE2A95C9BB00017AF9 /* SceneDelegate.swift */; };
 		EB61E4E42A95C9BB00017AF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB61E4E22A95C9BB00017AF9 /* Main.storyboard */; };
@@ -26,6 +29,9 @@
 		EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBAPIDataModels.swift; sourceTree = "<group>"; };
 		EB273F972A9CDA1400C26507 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		EB273FA12A9DF46E00C26507 /* AppMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppMovie.swift; path = ../../AppMovie.swift; sourceTree = "<group>"; };
+		EB273FA32A9E114E00C26507 /* MovieArchiveViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieArchiveViewDataModel.swift; sourceTree = "<group>"; };
+		EB273FA52A9E11AB00C26507 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		EB273FA72A9E125200C26507 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		EB61E4D92A95C9BB00017AF9 /* Training Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB61E4DC2A95C9BB00017AF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB61E4DE2A95C9BB00017AF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +91,9 @@
 				EB61E4DC2A95C9BB00017AF9 /* AppDelegate.swift */,
 				EB61E4E22A95C9BB00017AF9 /* Main.storyboard */,
 				EB61E5042A960AAD00017AF9 /* MovieArchiveTableViewCell.swift */,
+				EB273FA32A9E114E00C26507 /* MovieArchiveViewDataModel.swift */,
+				EB273FA52A9E11AB00C26507 /* Observer.swift */,
+				EB273FA72A9E125200C26507 /* Subject.swift */,
 				EB61E4F22A95CD5400017AF9 /* MovieDetailsViewController.swift */,
 				EB61E4FE2A95FEA900017AF9 /* MovieArchiveViewController.swift */,
 				EB61E4DE2A95C9BB00017AF9 /* SceneDelegate.swift */,
@@ -168,7 +177,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB61E5052A960AAD00017AF9 /* MovieArchiveTableViewCell.swift in Sources */,
+				EB273FA82A9E125200C26507 /* Subject.swift in Sources */,
+				EB273FA62A9E11AB00C26507 /* Observer.swift in Sources */,
 				EBAFADEC2A988D1B00B65FEF /* ImageDataManager.swift in Sources */,
+				EB273FA42A9E114E00C26507 /* MovieArchiveViewDataModel.swift in Sources */,
 				EB61E4F32A95CD5400017AF9 /* MovieDetailsViewController.swift in Sources */,
 				EB273F962A9CD94500C26507 /* MovieDBAPIDataModels.swift in Sources */,
 				EB61E4DD2A95C9BB00017AF9 /* AppDelegate.swift in Sources */,

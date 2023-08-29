@@ -12,7 +12,7 @@ let apiUrlString = "https://api.themoviedb.org/3/movie/now_playing?api_key=38a73
     
 let posterImageBasePath = "https://image.tmdb.org/t/p/w500/"
   
-enum httpMethod: String {
+enum HTTPMethod: String {
     case GET
     case PUT
     case DELETE

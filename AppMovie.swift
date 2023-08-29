@@ -8,17 +8,39 @@
 import Foundation
 import UIKit
 
+struct Movie {
+    var title: String
+    var overview: String
+    var releaseDate: String
+    var popularity: Double
+    var posterImagePath: String
+    var rating: Double
+    
+    init(_ movie: APIMovie){
+        title = movie.title
+        overview = movie.overview
+        releaseDate = movie.release_date
+        popularity = movie.popularity
+        posterImagePath = movie.poster_path
+        rating = movie.vote_average
+    }
+}
+
 class AppMovie {
-    var movieInfo: APIMovie
+    var movieInfo: Movie
     var moviePoster: UIImage
     
-    init(info: APIMovie, poster: UIImage){
+    init(info: Movie, poster: UIImage){
         movieInfo = info
         moviePoster = poster
     }
     
-    init(info: APIMovie){
+    init(info: Movie){
         movieInfo = info
         moviePoster = ImageDataManager.shared.getPlaceholderImage()
+    }
+    
+    func setPoster(){
+        
     }
 }

@@ -13,11 +13,11 @@ class MovieArchiveTableViewCell: UITableViewCell {
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieOverviewLabel: UILabel!
     
-    func setCellElements(from movie: APIMovie){
+    func setCellElements(from movie: Movie){
         movieTitleLabel.text = movie.title
         movieOverviewLabel.text = movie.overview
         moviePosterImageView.image = ImageDataManager.shared.getPlaceholderImage()
-        ImageDataManager.shared.getMoviePosterRequest(from: movie.poster_path) { (image) in
+        ImageDataManager.shared.getMoviePosterRequest(from: movie.posterImagePath) { (image) in
             DispatchQueue.main.async {
                 self.moviePosterImageView.image = image
             }
