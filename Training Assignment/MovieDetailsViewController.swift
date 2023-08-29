@@ -20,6 +20,12 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setViewElements()
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    func setViewElements(){
         self.title = movie.title
         self.releaseDateLabel.text = movie.release_date
         self.movieRatingLebel.text = String(movie.vote_average)
@@ -32,8 +38,6 @@ class MovieDetailsViewController: UIViewController {
                 self.moviePosterImageView.image = image
             }
         }
-        
-        // Do any additional setup after loading the view.
     }
     
     /*

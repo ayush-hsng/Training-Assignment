@@ -16,6 +16,7 @@ class MovieArchiveTableViewCell: UITableViewCell {
     func setCellElements(from movie: Movie){
         movieTitleLabel.text = movie.title
         movieOverviewLabel.text = movie.overview
+        moviePosterImageView.image = ImageDataManager.shared.getPlaceholderImage()
         ImageDataManager.shared.getMoviePosterRequest(from: movie.poster_path) { (image) in
             DispatchQueue.main.async {
                 self.moviePosterImageView.image = image
@@ -27,7 +28,7 @@ class MovieArchiveTableViewCell: UITableViewCell {
         
         //setting corner radius 5% of image height
         let posterHeight = self.moviePosterImageView.frame.height
-        let cornerRadius = posterHeight / 20
+        let cornerRadius = posterHeight / 15
         self.moviePosterImageView.layer.cornerRadius = cornerRadius
         
     }
@@ -35,6 +36,7 @@ class MovieArchiveTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        customizeCell()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -35,10 +35,10 @@ class MovieArchiveViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CheckMovieSegue" {
-                if let destinationVC = segue.destination as? MovieDetailsViewController {
-                    destinationVC.movie = moviesArchive[selectedRow]
-                }
+            if let destinationVC = segue.destination as? MovieDetailsViewController {
+                destinationVC.movie = moviesArchive[selectedRow]
             }
+        }
     }
 
 }
@@ -57,7 +57,6 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
         }
         
         cell.setCellElements(from: moviesArchive[indexPath.row])
-        cell.customizeCell()
         
         return cell
     }
