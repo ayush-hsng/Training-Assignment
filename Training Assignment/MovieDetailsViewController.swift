@@ -8,7 +8,7 @@
 import UIKit
 
 class MovieDetailsViewController: UIViewController {
-    var movie: Movie!
+    var movieData: AppMovie!
     
     @IBOutlet weak var moviePosterImageView: UIImageView!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -26,18 +26,13 @@ class MovieDetailsViewController: UIViewController {
     }
     
     func setViewElements(){
-        self.title = movie.title
-        self.releaseDateLabel.text = movie.release_date
-        self.movieRatingLebel.text = String(movie.vote_average)
-        self.popularityLabel.text = String(movie.popularity)
-        self.movieOverViewLabel.text = movie.overview
-    
-        ImageDataManager.shared.getMoviePosterRequest(from: movie.poster_path) { (image) in
-            DispatchQueue.main.async {
-                self.moviePosterImageView.layer.cornerRadius = 20
-                self.moviePosterImageView.image = image
-            }
-        }
+        self.title = self.movieData.movieInfo.title
+        self.releaseDateLabel.text = self.movieData.movieInfo.release_date
+        self.movieRatingLebel.text = String(self.movieData.movieInfo.vote_average)
+        self.popularityLabel.text = String(self.movieData.movieInfo.popularity)
+        self.movieOverViewLabel.text = self.movieData.movieInfo.overview
+        self.moviePosterImageView.image = self.movieData.moviePoster
+        self.moviePosterImageView.layer.cornerRadius = 20
     }
     
     /*

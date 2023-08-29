@@ -11,8 +11,7 @@ class MovieArchiveViewController: UIViewController {
     
     @IBOutlet weak var archiveTableView: UITableView!
     
-    var moviesArchive:[Movie] = [Movie]()
-    var selectedRow: Int!
+    var moviesArchive = [APIMovie]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +35,9 @@ class MovieArchiveViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CheckMovieSegue" {
             if let destinationVC = segue.destination as? MovieDetailsViewController {
-                destinationVC.movie = moviesArchive[selectedRow]
+                if let movieData = sender as? AppMovie {
+                    destinationVC.movieData = movieData
+                }
             }
         }
     }
@@ -62,8 +63,15 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedRow = indexPath.row
-        performSegue(withIdentifier: "CheckMovieSegue", sender: nil)
+        var poster: UIImage!
+        if let cell = tableView.cellForRow(at: indexPath) as? MovieArchiveTableViewCell {
+            poster = cell.moviePosterImageView.image
+        }else {
+            poster = ImageDataManager.shared.getPlaceholderImage()
+        }
+        
+        let sender = AppMovie(info: moviesArchive[indexPath.row], poster: poster)
+        performSegue(withIdentifier: "CheckMovieSegue", sender: sender)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

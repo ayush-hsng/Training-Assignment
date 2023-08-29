@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EB273F962A9CD94500C26507 /* MovieDBAPIDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */; };
 		EB273F982A9CDA1400C26507 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273F972A9CDA1400C26507 /* AppConstants.swift */; };
+		EB273FA22A9DF46E00C26507 /* AppMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273FA12A9DF46E00C26507 /* AppMovie.swift */; };
 		EB61E4DD2A95C9BB00017AF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E4DC2A95C9BB00017AF9 /* AppDelegate.swift */; };
 		EB61E4DF2A95C9BB00017AF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61E4DE2A95C9BB00017AF9 /* SceneDelegate.swift */; };
 		EB61E4E42A95C9BB00017AF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB61E4E22A95C9BB00017AF9 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBAPIDataModels.swift; sourceTree = "<group>"; };
 		EB273F972A9CDA1400C26507 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		EB273FA12A9DF46E00C26507 /* AppMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppMovie.swift; path = ../../AppMovie.swift; sourceTree = "<group>"; };
 		EB61E4D92A95C9BB00017AF9 /* Training Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB61E4DC2A95C9BB00017AF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB61E4DE2A95C9BB00017AF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				EB273F972A9CDA1400C26507 /* AppConstants.swift */,
+				EB273FA12A9DF46E00C26507 /* AppMovie.swift */,
 				EBAFADE92A988D0D00B65FEF /* JsonDataManager.swift */,
 				EBAFADEB2A988D1B00B65FEF /* ImageDataManager.swift */,
 				EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */,
@@ -170,6 +173,7 @@
 				EB273F962A9CD94500C26507 /* MovieDBAPIDataModels.swift in Sources */,
 				EB61E4DD2A95C9BB00017AF9 /* AppDelegate.swift in Sources */,
 				EB61E4FF2A95FEA900017AF9 /* MovieArchiveViewController.swift in Sources */,
+				EB273FA22A9DF46E00C26507 /* AppMovie.swift in Sources */,
 				EB61E4DF2A95C9BB00017AF9 /* SceneDelegate.swift in Sources */,
 				EBAFADEA2A988D0D00B65FEF /* JsonDataManager.swift in Sources */,
 				EB273F982A9CDA1400C26507 /* AppConstants.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct APIMovie: Codable {
     var title: String
     var overview: String
     var popularity: Double
@@ -17,6 +17,6 @@ struct Movie: Codable {
 }
 
 struct PopularMovieResult: Codable {
-    var results: [Movie]
+    var results: [APIMovie]
 }
 

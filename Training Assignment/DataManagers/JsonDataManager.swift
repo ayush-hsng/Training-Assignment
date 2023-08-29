@@ -12,7 +12,7 @@ class JsonDataManager {
     
     private init() {    }
     
-    func getPopularMoviesRequest(completionhandler: @escaping ([Movie]?)->(Void)) {
+    func getPopularMoviesRequest(completionhandler: @escaping ([APIMovie]?)->(Void)) {
         let headers = ["accept": "application/json"]
         
         let url = URL(string: apiUrlString)!
