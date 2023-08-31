@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBAPIDataModels.swift; sourceTree = "<group>"; };
 		EB273F972A9CDA1400C26507 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
-		EB273FA12A9DF46E00C26507 /* AppMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppMovie.swift; path = ../../AppMovie.swift; sourceTree = "<group>"; };
+		EB273FA12A9DF46E00C26507 /* AppMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMovie.swift; sourceTree = "<group>"; };
 		EB273FA32A9E114E00C26507 /* MovieArchiveViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieArchiveViewDataModel.swift; sourceTree = "<group>"; };
 		EB273FAC2A9E3A9100C26507 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		EB61E4D92A95C9BB00017AF9 /* Training Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,15 +55,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EB273F9A2A9CDEFF00C26507 /* DataManagers */ = {
+		EB273F9A2A9CDEFF00C26507 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				EB273F972A9CDA1400C26507 /* AppConstants.swift */,
-				EB273FA12A9DF46E00C26507 /* AppMovie.swift */,
 				EBBA174D2AA03B940063E0A6 /* DataManager.swift */,
-				EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */,
 			);
-			path = DataManagers;
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		EB2C5CFC2AA0BB1300AC7F3B /* Movie Archive Page MVC */ = {
+			isa = PBXGroup;
+			children = (
+				EB273FA32A9E114E00C26507 /* MovieArchiveViewDataModel.swift */,
+				EB61E4FE2A95FEA900017AF9 /* MovieArchiveViewController.swift */,
+				EB61E5042A960AAD00017AF9 /* MovieArchiveTableViewCell.swift */,
+			);
+			path = "Movie Archive Page MVC";
+			sourceTree = "<group>";
+		};
+		EB2C5CFD2AA0BB3400AC7F3B /* Movie Details Page MVC */ = {
+			isa = PBXGroup;
+			children = (
+				EB61E4F22A95CD5400017AF9 /* MovieDetailsViewController.swift */,
+				EBBA174B2AA02E610063E0A6 /* MovieDetailsViewDataModel.swift */,
+			);
+			path = "Movie Details Page MVC";
+			sourceTree = "<group>";
+		};
+		EB2C5CFE2AA0BB9500AC7F3B /* Movie Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */,
+				EB273FA12A9DF46E00C26507 /* AppMovie.swift */,
+			);
+			path = "Movie Data Model";
 			sourceTree = "<group>";
 		};
 		EB61E4D02A95C9BB00017AF9 = {
@@ -85,16 +110,15 @@
 		EB61E4DB2A95C9BB00017AF9 /* Training Assignment */ = {
 			isa = PBXGroup;
 			children = (
-				EB61E4DC2A95C9BB00017AF9 /* AppDelegate.swift */,
 				EB61E4E22A95C9BB00017AF9 /* Main.storyboard */,
-				EB61E5042A960AAD00017AF9 /* MovieArchiveTableViewCell.swift */,
-				EB273FA32A9E114E00C26507 /* MovieArchiveViewDataModel.swift */,
+				EB61E4DC2A95C9BB00017AF9 /* AppDelegate.swift */,
+				EB273F972A9CDA1400C26507 /* AppConstants.swift */,
 				EB273FAC2A9E3A9100C26507 /* Protocols.swift */,
-				EB61E4FE2A95FEA900017AF9 /* MovieArchiveViewController.swift */,
-				EB61E4F22A95CD5400017AF9 /* MovieDetailsViewController.swift */,
-				EBBA174B2AA02E610063E0A6 /* MovieDetailsViewDataModel.swift */,
 				EB61E4DE2A95C9BB00017AF9 /* SceneDelegate.swift */,
-				EB273F9A2A9CDEFF00C26507 /* DataManagers */,
+				EB2C5CFE2AA0BB9500AC7F3B /* Movie Data Model */,
+				EB2C5CFD2AA0BB3400AC7F3B /* Movie Details Page MVC */,
+				EB2C5CFC2AA0BB1300AC7F3B /* Movie Archive Page MVC */,
+				EB273F9A2A9CDEFF00C26507 /* Managers */,
 				EB61E4E52A95C9BC00017AF9 /* Assets.xcassets */,
 				EB61E4E72A95C9BC00017AF9 /* LaunchScreen.storyboard */,
 				EB61E4EA2A95C9BC00017AF9 /* Info.plist */,

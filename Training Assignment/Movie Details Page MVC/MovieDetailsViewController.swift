@@ -62,6 +62,8 @@ class MovieDetailsViewController: UIViewController {
 
 extension MovieDetailsViewController: Observer {
     func notifyMeWhenDone() {
-        self.moviePosterImageView.image = movieData.moviePoster
+        DispatchQueue.main.async {
+            self.moviePosterImageView.image = self.movieData.moviePoster
+        }
     }
 }

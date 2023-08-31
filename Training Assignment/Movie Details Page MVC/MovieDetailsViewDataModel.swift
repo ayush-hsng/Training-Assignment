@@ -30,11 +30,9 @@ class MovieDetailsViewDataModel: Observable {
     func setPoster(){
         if !posterLoaded {
             DataManager.shared.getMoviePosterRequest(from: movieInfo.posterImagePath) { (image) in
-                DispatchQueue.main.async {
-                    self.moviePoster = image
-                    self.posterLoaded = true
-                    self.notifyObserver()
-                }
+                self.moviePoster = image
+                self.posterLoaded = true
+                self.notifyObserver()
             }
         }
         

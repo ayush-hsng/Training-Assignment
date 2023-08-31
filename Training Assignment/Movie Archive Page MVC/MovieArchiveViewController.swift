@@ -66,7 +66,6 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
 
 extension MovieArchiveViewController: Observer {
     func notifyMeWhenDone() {
-        
         DispatchQueue.main.async {
             self.archiveTableView.reloadData()
         }
