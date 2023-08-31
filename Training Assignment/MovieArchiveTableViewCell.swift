@@ -25,8 +25,6 @@ class MovieArchiveTableViewCell: UITableViewCell {
     }
     
     func customizeCell(){
-        
-        //setting corner radius 5% of image height
         let posterHeight = self.moviePosterImageView.frame.height
         let cornerRadius = posterHeight / 15
         self.moviePosterImageView.layer.cornerRadius = cornerRadius

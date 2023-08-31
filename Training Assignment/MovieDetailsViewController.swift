@@ -8,31 +8,44 @@
 import UIKit
 
 class MovieDetailsViewController: UIViewController {
-    var movieData: AppMovie!
+    var movieData: MovieDetailsViewDataModel!
     
     @IBOutlet weak var moviePosterImageView: UIImageView!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var movieRatingLebel: UILabel!
     @IBOutlet weak var popularityLabel: UILabel!
     @IBOutlet weak var movieOverViewLabel: UILabel!
+    @IBOutlet weak var releaseDateSectionHeadLabel: UILabel!
+    @IBOutlet weak var ratingSectionHeadLabel: UILabel!
+    @IBOutlet weak var popularitySectionHeadLabel: UILabel!
+    @IBOutlet weak var overviewSectionHeadLabel: UILabel!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        movieData.subscribe(observer: self)
+        setInterface()
+        setViewContent()
         
-        setViewElements()
         
         // Do any additional setup after loading the view.
     }
     
-    func setViewElements(){
+    func setInterface(){
+        self.releaseDateSectionHeadLabel.text = "Release Date"
+        self.ratingSectionHeadLabel.text = "⭐️ Rating"
+        self.popularitySectionHeadLabel.text = "❤️Popularity"
+        self.overviewSectionHeadLabel.text = "Overview"
+        self.moviePosterImageView.layer.cornerRadius = 20
+    }
+    
+    func setViewContent(){
         self.title = self.movieData.movieInfo.title
         self.releaseDateLabel.text = self.movieData.movieInfo.releaseDate
         self.movieRatingLebel.text = String(self.movieData.movieInfo.rating)
         self.popularityLabel.text = String(self.movieData.movieInfo.popularity)
         self.movieOverViewLabel.text = self.movieData.movieInfo.overview
-        self.moviePosterImageView.image = self.movieData.moviePoster
-        self.moviePosterImageView.layer.cornerRadius = 20
+        movieData.setPoster()
     }
     
     /*
@@ -45,4 +58,10 @@ class MovieDetailsViewController: UIViewController {
     }
     */
 
+}
+
+extension MovieDetailsViewController: Observer {
+    func notifyMeWhenDone() {
+        self.moviePosterImageView.image = movieData.moviePoster
+    }
 }

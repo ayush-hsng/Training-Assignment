@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieArchiveViewDataModel: Subject{
+class MovieArchiveViewDataModel: Observable{
     var observer: Observer?
     var apiResponse: PopularMovieResult!
     var popularMovies = [Movie]()
@@ -21,7 +21,7 @@ class MovieArchiveViewDataModel: Subject{
     }
     
     func fetchPopularMovies(){
-        JsonDataManager.shared.getPopularMoviesRequest { (apiResponse) in
+        DataManager.shared.getPopularMoviesRequest(from: API_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
                 self.apiResponse = response
                 self.filterResponse()

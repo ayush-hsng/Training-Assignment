@@ -15,7 +15,7 @@ class JsonDataManager {
     func getPopularMoviesRequest(completionhandler: @escaping (PopularMovieResult?)->(Void)) {
         let headers = ["accept": "application/json"]
         
-        let url = URL(string: apiUrlString)!
+        let url = URL(string: API_URL_STRING)!
         
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.GET.rawValue

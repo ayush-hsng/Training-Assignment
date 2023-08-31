@@ -1,18 +1,40 @@
 //
-//  ImageDataManager.swift
+//  NetworkManager.swift
 //  Training Assignment
 //
-//  Created by Ayush Kumar Sinha on 25/08/23.
+//  Created by Ayush Kumar Sinha on 31/08/23.
 //
 
 import Foundation
 import UIKit
 
-class ImageDataManager {
+class DataManager {
+    static let shared = DataManager()
     
-    static let shared = ImageDataManager()
+    init() { }
     
-    private init() {    }
+    func getPopularMoviesRequest(from apiUrlString: String, completionhandler: @escaping (PopularMovieResult?)->(Void)) {
+        let headers = ["accept": "application/json"]
+        
+        let url = URL(string: apiUrlString)!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.GET.rawValue
+        request.allHTTPHeaderFields = headers
+        
+        URLSession.shared.dataTask(with: request) { (data,response,error) in
+            guard error == nil, let jsonData = data else{
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                print("Status code not 200")
+                return
+            }
+            let responseData = try? JSONDecoder().decode(PopularMovieResult.self, from: jsonData)
+            completionhandler(responseData)
+        }.resume()
+    }
     
     func getMoviePosterRequest(from imageFile: String,completionHandler: @escaping (UIImage) -> (Void)){
         let urlString = POSTER_IMAGE_BASE_PATH + imageFile

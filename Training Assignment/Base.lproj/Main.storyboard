@@ -103,14 +103,14 @@
                                     <constraint firstAttribute="width" constant="188" id="mRH-jC-coP"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24m-W5-B3f">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24m-W5-B3f">
                                 <rect key="frame" x="236" y="203" width="149" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️ Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRN-9U-UQJ">
-                                <rect key="frame" x="236" y="292" width="86" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRN-9U-UQJ">
+                                <rect key="frame" x="236" y="292" width="48" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -133,8 +133,8 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❤️Popularity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rg4-Mq-gUe">
-                                <rect key="frame" x="236" y="381" width="113" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rg4-Mq-gUe">
+                                <rect key="frame" x="236" y="381" width="48" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -182,8 +182,12 @@
                         <outlet property="movieOverViewLabel" destination="N5B-xo-PCa" id="cv0-fY-B99"/>
                         <outlet property="moviePosterImageView" destination="vVK-ht-CFK" id="EG3-Cj-iCy"/>
                         <outlet property="movieRatingLebel" destination="0x6-D2-vBN" id="XC4-6J-zos"/>
+                        <outlet property="overviewSectionHeadLabel" destination="Y8M-F9-k6g" id="edE-sf-NTe"/>
                         <outlet property="popularityLabel" destination="olo-p4-4Kl" id="IlY-7Q-vg5"/>
+                        <outlet property="popularitySectionHeadLabel" destination="rg4-Mq-gUe" id="eja-qh-TYQ"/>
+                        <outlet property="ratingSectionHeadLabel" destination="iRN-9U-UQJ" id="nN3-4s-JzR"/>
                         <outlet property="releaseDateLabel" destination="wYZ-sK-R60" id="yd5-ac-JWg"/>
+                        <outlet property="releaseDateSectionHeadLabel" destination="24m-W5-B3f" id="3x1-FS-Pzd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2c-LD-5uZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

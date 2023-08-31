@@ -29,8 +29,8 @@ class MovieArchiveViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CheckMovieSegue" {
             if let destinationVC = segue.destination as? MovieDetailsViewController {
-                if let movieData = sender as? AppMovie {
-                    destinationVC.movieData = movieData
+                if let viewData = sender as? MovieDetailsViewDataModel {
+                    destinationVC.movieData = viewData
                 }
             }
         }
@@ -57,14 +57,8 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var poster: UIImage!
-        if let cell = tableView.cellForRow(at: indexPath) as? MovieArchiveTableViewCell {
-            poster = cell.moviePosterImageView.image
-        }else {
-            poster = ImageDataManager.shared.getPlaceholderImage()
-        }
         
-        let sender = AppMovie(info: viewDataModel.getPopularMovie(by: indexPath.row), poster: poster)
+        let sender = MovieDetailsViewDataModel(info: viewDataModel.getPopularMovie(by: indexPath.row))
         performSegue(withIdentifier: "CheckMovieSegue", sender: sender)
         tableView.deselectRow(at: indexPath, animated: true)
     }
