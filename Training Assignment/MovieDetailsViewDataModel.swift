@@ -23,7 +23,7 @@ class MovieDetailsViewDataModel: Observable {
     
     init(info: Movie){
         movieInfo = info
-        moviePoster = ImageDataManager.shared.getPlaceholderImage()
+        moviePoster = DataManager.shared.getPlaceholderImage()
         posterLoaded = false
     }
     

@@ -16,8 +16,8 @@ class MovieArchiveTableViewCell: UITableViewCell {
     func setCellElements(from movie: Movie){
         movieTitleLabel.text = movie.title
         movieOverviewLabel.text = movie.overview
-        moviePosterImageView.image = ImageDataManager.shared.getPlaceholderImage()
-        ImageDataManager.shared.getMoviePosterRequest(from: movie.posterImagePath) { (image) in
+        moviePosterImageView.image = DataManager.shared.getPlaceholderImage()
+        DataManager.shared.getMoviePosterRequest(from: movie.posterImagePath) { (image) in
             DispatchQueue.main.async {
                 self.moviePosterImageView.image = image
             }

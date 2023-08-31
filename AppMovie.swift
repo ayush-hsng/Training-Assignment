@@ -25,22 +25,3 @@ struct Movie {
         rating = movie.vote_average
     }
 }
-
-class AppMovie {
-    var movieInfo: Movie
-    var moviePoster: UIImage
-    
-    init(info: Movie, poster: UIImage){
-        movieInfo = info
-        moviePoster = poster
-    }
-    
-    init(info: Movie){
-        movieInfo = info
-        moviePoster = ImageDataManager.shared.getPlaceholderImage()
-    }
-    
-    func setPoster(){
-        
-    }
-}
