@@ -24,6 +24,7 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         movieData.subscribe(observer: self)
+        movieData.setPoster()
         setInterface()
         setViewContent()
         
@@ -40,12 +41,11 @@ class MovieDetailsViewController: UIViewController {
     }
     
     func setViewContent(){
-        self.title = self.movieData.movieInfo.title
-        self.releaseDateLabel.text = self.movieData.movieInfo.releaseDate
-        self.movieRatingLebel.text = String(self.movieData.movieInfo.rating)
-        self.popularityLabel.text = String(self.movieData.movieInfo.popularity)
-        self.movieOverViewLabel.text = self.movieData.movieInfo.overview
-        movieData.setPoster()
+        self.title = self.movieData.getTitle()
+        self.releaseDateLabel.text = self.movieData.getReleaseDate()
+        self.movieRatingLebel.text = self.movieData.getRating()
+        self.popularityLabel.text = self.movieData.getPopularity()
+        self.movieOverViewLabel.text = self.movieData.getOverview()
     }
     
     /*

@@ -6,11 +6,45 @@
 //
 
 import Foundation
+import UIKit
 
 class MovieArchiveViewDataModel: Observable{
     var observer: Observer?
     var apiResponse: PopularMovieResult!
-    var popularMovies = [Movie]()
+    var movies = [MovieArchiveCellDataModel]()
+    
+    
+    
+    func fetchPopularMovies(){
+        DataManager.shared.fetchJsonDataRequest(from: API_URL_STRING) { (apiResponse) in
+            if let response = apiResponse {
+                self.apiResponse = response
+                self.processResponse()
+                self.notifyObserver()
+            }
+        }
+    }
+    
+    func processResponse(){
+        for movieData in apiResponse.results {
+            movies.append(MovieArchiveCellDataModel(movieInfo: movieData))
+        }
+    }
+    
+    //Getter Methods
+    
+    func getMovieData(ofIndex index: Int) -> APIMovie {
+        return apiResponse.results[index]
+    }
+    func getMovieInfo(ofIndex index: Int) -> MovieArchiveCellDataModel{
+        return movies[index]
+    }
+    
+    func getMovieCount() -> Int{
+        return movies.count
+    }
+    
+    // Observable Protocol methoods
     
     func subscribe(observer: Observer) {
         self.observer = observer
@@ -20,32 +54,7 @@ class MovieArchiveViewDataModel: Observable{
         self.observer = nil
     }
     
-    func fetchPopularMovies(){
-        DataManager.shared.getPopularMoviesRequest(from: API_URL_STRING) { (apiResponse) in
-            if let response = apiResponse {
-                self.apiResponse = response
-                self.filterResponse()
-                self.notifyObserver()
-            }
-        }
-    }
-    
-    func getPopularMovie(by index: Int) -> Movie{
-        return popularMovies[index]
-    }
-    
-    func getPopularMovieCount() -> Int{
-        return popularMovies.count
-    }
-    
-    func filterResponse(){
-        for movieData in apiResponse.results {
-            popularMovies.append(Movie(movieData))
-        }
-    }
-    
     func notifyObserver() {
         observer?.notifyMeWhenDone()
     }
-    
 }

@@ -41,7 +41,7 @@ class MovieArchiveViewController: UIViewController {
 extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewDataModel.getPopularMovieCount()
+        return viewDataModel.getMovieCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,14 +51,16 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
             return cell
         }
         
-        cell.setCellElements(from: viewDataModel.getPopularMovie(by: indexPath.row))
+        cell.cellDataModel = viewDataModel.getMovieInfo(ofIndex: indexPath.row)
+        
+        cell.setCellElements()
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let sender = MovieDetailsViewDataModel(info: viewDataModel.getPopularMovie(by: indexPath.row))
+        let sender = MovieDetailsViewDataModel(info: viewDataModel.getMovieData(ofIndex: indexPath.row))
         performSegue(withIdentifier: "CheckMovieSegue", sender: sender)
         tableView.deselectRow(at: indexPath, animated: true)
     }
