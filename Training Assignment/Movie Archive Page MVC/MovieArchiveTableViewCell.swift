@@ -14,7 +14,9 @@ class MovieArchiveTableViewCell: UITableViewCell {
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieOverviewLabel: UILabel!
     
+    //Dependency
     var cellDataModel: MovieArchiveCellDataModel!
+    var imageLoader = ImageLoadManager.shared
     
     override func prepareForReuse() {
         self.moviePosterImageView.image = nil
@@ -35,7 +37,7 @@ class MovieArchiveTableViewCell: UITableViewCell {
     func setCellElements(){
         self.movieTitleLabel.text = self.cellDataModel.getTitle()
         self.movieOverviewLabel.text = self.cellDataModel.getOverview()
-        ImageLoadManager.shared.loadImage(of: cellDataModel.getPosterFile()) { (image) in
+        imageLoader.loadImage(of: cellDataModel.getPosterFile()) { (image) in
             DispatchQueue.main.async {
                 self.moviePosterImageView.image = image
             }

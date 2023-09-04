@@ -22,7 +22,7 @@ class ImageLoadManager {
     
     func loadImage(of filename: String, onCompletion: @escaping (UIImage) -> (Void)){
         guard let image = imageCache[filename] else {
-            dataManager.fetchImageDataRequest(from: filename){ (image) in
+            dataManager.requestImageData(from: filename){ (image) in
                 if let image = image {
                     self.imageCache[filename] = image
                 }

@@ -4,8 +4,9 @@
 //
 //  Created by Ayush Kumar Sinha on 31/08/23.
 //
-// File Responsbility - Define Network Manager, which fetches data from API servers
-//      * Fetch Data from Internet(perfrom Network Calls) *
+// File Responsbility - Define Data Manager
+//      * create Request for fetching data from API Servers according to requeirements *
+//      * convert fetched data to request type *
 
 // App will provide closures(completionHandler) to fetch methods for using the data as and when required
 
@@ -14,64 +15,49 @@ import UIKit
 
 class DataManager {
     static let shared = DataManager()
+    
+    //Dependencies
+    var requestBuilder : RequestBuilder!
+    var networkHandler = NetworkHandler.shared
+    var decoder = JSONDecoder()
     let session = URLSession.shared
     
     init() { }
     
-    func fetchJsonDataRequest(from apiUrlString: String, completionhandler: @escaping (PopularMovieResult?)->(Void)) {
-        let headers = ["accept": "application/json"]
+    func requestJsonData(of page: Int = 1 ,from apiUrlString: String, completionhandler: @escaping (PopularMovieResult?)->(Void)) {
         
-        let url = URL(string: apiUrlString)!
+        let queryList = [   "api_key" : API_KEY,
+                            "language" : LANG_CODE,
+                            "page" : String(page)]
         
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.GET.rawValue
-        request.allHTTPHeaderFields = headers
+        requestBuilder = RequestBuilder(baseUrl: apiUrlString)
+        requestBuilder.setQueryParameters(queryList: queryList)
+        requestBuilder.setHTTPMethod(requestMethod: HTTPMethod.GET)
+        requestBuilder.setHeader(headers: ["accept": "application/json"])
         
-        session.dataTask(with: request) { (data,response,error) in
-            guard error == nil, let jsonData = data else{
-                completionhandler(nil)
-                return
+        if let request = requestBuilder.getRequest() {
+            networkHandler.fetchData(using: request) { (data) in
+                if let jsonData = data {
+                    let responseData = try? self.decoder.decode(PopularMovieResult.self, from: jsonData)
+                    completionhandler(responseData)
+                }
             }
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                print("Status code not 200")
-                completionhandler(nil)
-                return
-            }
-            let responseData = try? JSONDecoder().decode(PopularMovieResult.self, from: jsonData)
-            completionhandler(responseData)
-        }.resume()
+        }
     }
     
-    func fetchImageDataRequest(from imageFile: String,completionHandler: @escaping (UIImage?) -> (Void)){
+    func requestImageData(from imageFile: String,completionHandler: @escaping (UIImage?) -> (Void)){
+        
         let urlString = POSTER_IMAGE_BASE_PATH + imageFile
-        let url = URL(string: urlString)!
+        requestBuilder = RequestBuilder(baseUrl: urlString)
         
-        session.dataTask(with: URLRequest(url: url)) { (data,response,error) in
-            guard error == nil, let imageData = data else{
-                completionHandler(nil)
-                return
+        if let request = requestBuilder.getRequest() {
+            networkHandler.fetchData(using: request) { (data) in
+                if let imageData = data {
+                    completionHandler(UIImage(data: imageData))
+                }
             }
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                print("Status code not 200")
-                completionHandler(nil)
-                return
-            }
-            completionHandler(UIImage(data: imageData))
-        }.resume()
+        }
+        
     }
-    
-//    func buildURLRequest(from urlString: String, and queryList: [String: String]) {
-//        var urlComponents = URLComponents(string: urlString)
-//        urlComponents?.queryItems = queryList.map { URLQueryItem(name: $0, value: $1) }
-//
-//        guard let url = urlComponents?.url else {
-//            return
-//        }
-//        var request = URLRequest(url: url)
-//        request.httpMethod = HTTPMethod.GET.rawValue
-//        request.allHTTPHeaderFields =
-//    }
     
 }

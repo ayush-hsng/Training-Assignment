@@ -22,7 +22,7 @@ class MovieArchiveViewDataModel: Observable{
     var dataManager = DataManager.shared
     
     func fetchPopularMovies(){
-        dataManager.fetchJsonDataRequest(from: API_URL_STRING) { (apiResponse) in
+        dataManager.requestJsonData(from: API_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
                 self.apiResponse = response
                 self.processResponse()
@@ -32,9 +32,7 @@ class MovieArchiveViewDataModel: Observable{
     }
     
     func processResponse(){
-        for movieData in apiResponse.results {
-            movies.append(MovieArchiveCellDataModel(movieInfo: movieData))
-        }
+        movies = apiResponse.results.map() { MovieArchiveCellDataModel(movieInfo: $0) }
     }
     
     //Getter Methods
@@ -42,6 +40,7 @@ class MovieArchiveViewDataModel: Observable{
     func getMovieData(ofIndex index: Int) -> APIMovie {
         return apiResponse.results[index]
     }
+    
     func getMovieInfo(ofIndex index: Int) -> MovieArchiveCellDataModel{
         return movies[index]
     }
