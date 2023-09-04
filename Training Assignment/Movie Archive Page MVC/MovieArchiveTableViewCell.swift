@@ -5,6 +5,7 @@
 //  Created by Ayush Kumar Sinha on 23/08/23.
 //
 
+
 import UIKit
 
 class MovieArchiveTableViewCell: UITableViewCell {

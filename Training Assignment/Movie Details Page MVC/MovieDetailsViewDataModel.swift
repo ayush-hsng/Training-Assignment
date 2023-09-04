@@ -4,6 +4,10 @@
 //
 //  Created by Ayush Kumar Sinha on 31/08/23.
 //
+// File Responsibility - Define View Data Model from Movie Details Page
+//      * Process and Store Movie Information *
+//      * Notify View Controller when Processing is done( implements observable protocol) *
+//      * provide Getter Methods *
 
 import Foundation
 import UIKit

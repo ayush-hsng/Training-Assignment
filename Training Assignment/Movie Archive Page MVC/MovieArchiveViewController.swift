@@ -4,6 +4,11 @@
 //
 //  Created by Ayush Kumar Sinha on 23/08/23.
 //
+// File Responsibility - Define View Controller for Movie Archive Page
+//      * store a view data model for page view *
+//      * act as observer of model status( implement Observer protocol)  *
+//      * render the data onto view page( act as data Source for table view) *
+//      * act as delegate of table view to handle cell selection events *
 
 import UIKit
 

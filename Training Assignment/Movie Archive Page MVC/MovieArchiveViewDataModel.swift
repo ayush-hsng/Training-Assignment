@@ -4,6 +4,11 @@
 //
 //  Created by Ayush Kumar Sinha on 29/08/23.
 //
+// File Responsibility - Define Data Model for Movie Archive Page
+//      * fetch and store Data for movie from api handler *
+//      * process data( make data model instances for movie cells) *
+//      * notify view controller when processing is done( implement observable protocol) *
+//      * provide Getter Methods *
 
 import Foundation
 import UIKit
@@ -13,10 +18,11 @@ class MovieArchiveViewDataModel: Observable{
     var apiResponse: PopularMovieResult!
     var movies = [MovieArchiveCellDataModel]()
     
-    
+    //dependency
+    var dataManager = DataManager.shared
     
     func fetchPopularMovies(){
-        DataManager.shared.fetchJsonDataRequest(from: API_URL_STRING) { (apiResponse) in
+        dataManager.fetchJsonDataRequest(from: API_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
                 self.apiResponse = response
                 self.processResponse()

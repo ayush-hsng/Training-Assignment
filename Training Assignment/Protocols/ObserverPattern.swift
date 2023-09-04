@@ -1,9 +1,10 @@
 //
-//  Protocols.swift
+//  ObserverPattern.swift
 //  Training Assignment
 //
-//  Created by Ayush Kumar Sinha on 29/08/23.
+//  Created by Ayush Kumar Sinha on 03/09/23.
 //
+// File Responsibility - Define protocols for implementing the Observer Pattern
 
 import Foundation
 

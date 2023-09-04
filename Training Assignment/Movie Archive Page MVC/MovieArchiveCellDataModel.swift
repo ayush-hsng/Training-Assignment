@@ -4,6 +4,9 @@
 //
 //  Created by Ayush Kumar Sinha on 02/09/23.
 //
+// File Responsibility - Define Data Model for Table View Cell of Movie Archive Page
+//      * Process and Store Movie Information *
+//      * Provide Getter Methods for Movie Information *
 
 import Foundation
 import UIKit

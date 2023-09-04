@@ -4,6 +4,9 @@
 //
 //  Created by Ayush Kumar Sinha on 23/08/23.
 //
+// File Responsibility - Deifne View Controller for Movie Details Page
+//      * Stores a view data model for Movie Details Page *
+//      * Renders Data when Model is Prepared( implements observer protocol) *
 
 import UIKit
 
