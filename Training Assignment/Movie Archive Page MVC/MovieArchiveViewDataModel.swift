@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 
 class MovieArchiveViewDataModel: Observable{
-    var observer: Observer?
+    var observers = [UUID: Observer]()
     var apiResponse: PopularMovieResult!
     var movies = [MovieArchiveCellDataModel]()
     
@@ -26,7 +26,7 @@ class MovieArchiveViewDataModel: Observable{
             if let response = apiResponse {
                 self.apiResponse = response
                 self.processResponse()
-                self.notifyObserver()
+                self.notifyObservers()
             }
         }
     }
@@ -51,15 +51,19 @@ class MovieArchiveViewDataModel: Observable{
     
     // Observable Protocol methoods
     
-    func subscribe(observer: Observer) {
-        self.observer = observer
+    func subscribe(observer: Observer) -> UUID{
+        let observerID = UUID()
+        observers[observerID] = observer
+        return observerID
     }
     
-    func unsubscribe() {
-        self.observer = nil
+    func unsubscribe(observerID : UUID) {
+        self.observers.removeValue(forKey: observerID)
     }
     
-    func notifyObserver() {
-        observer?.notifyMeWhenDone()
+    func notifyObservers() {
+        for observer in observers.values {
+            observer.notifyMeWhenDone()
+        }
     }
 }

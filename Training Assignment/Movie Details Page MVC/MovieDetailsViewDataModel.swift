@@ -13,7 +13,7 @@ import Foundation
 import UIKit
 
 class MovieDetailsViewDataModel: Observable {
-    var observer: Observer?
+    var observers: [UUID: Observer]
     
     class MovieInfo {
         var title: String
@@ -39,6 +39,7 @@ class MovieDetailsViewDataModel: Observable {
 
     init(info: APIMovie){
         movieInfo = MovieInfo(info)
+        observers = [UUID: Observer]()
     }
 
     
@@ -47,7 +48,7 @@ class MovieDetailsViewDataModel: Observable {
     func setPoster(){
         ImageLoadManager.shared.loadImage(of: movieInfo.posterImagePath) { (image) in
             self.moviePoster = image
-            self.notifyObserver()
+            self.notifyObservers()
         }
         
     }
@@ -80,15 +81,19 @@ class MovieDetailsViewDataModel: Observable {
     
     //Observable protocol Methods
     
-    func subscribe(observer: Observer) {
-        self.observer = observer
+    func subscribe(observer: Observer) -> UUID{
+        let observerID = UUID()
+        observers[observerID] = observer
+        return observerID
     }
     
-    func unsubscribe() {
-        self.observer = nil
+    func unsubscribe(observerID : UUID) {
+        self.observers.removeValue(forKey: observerID)
     }
     
-    func notifyObserver() {
-        observer?.notifyMeWhenDone()
+    func notifyObservers() {
+        for observer in observers.values {
+            observer.notifyMeWhenDone()
+        }
     }
 }

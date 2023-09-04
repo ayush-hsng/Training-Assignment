@@ -12,6 +12,7 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
     var movieData: MovieDetailsViewDataModel!
+    var observerID: UUID!
     
     @IBOutlet weak var moviePosterImageView: UIImageView!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -26,7 +27,7 @@ class MovieDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        movieData.subscribe(observer: self)
+        self.observerID = movieData.subscribe(observer: self)
         movieData.setPoster()
         setInterface()
         setViewContent()
@@ -64,6 +65,8 @@ class MovieDetailsViewController: UIViewController {
 }
 
 extension MovieDetailsViewController: Observer {
+   
+    
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
             self.moviePosterImageView.image = self.movieData.moviePoster

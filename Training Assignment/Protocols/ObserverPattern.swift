@@ -9,12 +9,13 @@
 import Foundation
 
 protocol Observer {
+    var observerID: UUID! { get set}
     func notifyMeWhenDone()
 }
 
 protocol Observable {
-    var observer: Observer? {get set}
-    func subscribe(observer: Observer)
-    func unsubscribe()
-    func notifyObserver()
+    var observers: [UUID: Observer] {get set}
+    func subscribe(observer: Observer) -> UUID
+    func unsubscribe(observerID: UUID)
+    func notifyObservers()
 }

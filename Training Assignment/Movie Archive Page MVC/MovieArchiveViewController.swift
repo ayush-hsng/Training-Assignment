@@ -17,6 +17,7 @@ class MovieArchiveViewController: UIViewController {
     @IBOutlet weak var archiveTableView: UITableView!
     
     var viewDataModel : MovieArchiveViewDataModel!
+    var observerID: UUID!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,7 @@ class MovieArchiveViewController: UIViewController {
         self.archiveTableView.dataSource = self
         
         viewDataModel = MovieArchiveViewDataModel()
-        viewDataModel.subscribe(observer: self)
+        self.observerID = viewDataModel.subscribe(observer: self)
         viewDataModel.fetchPopularMovies()
 
         // Do any additional setup after loading the view.
