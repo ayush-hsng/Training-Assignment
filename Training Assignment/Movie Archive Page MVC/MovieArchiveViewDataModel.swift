@@ -15,6 +15,8 @@ import UIKit
 
 class MovieArchiveViewDataModel: Observable{
     var observers = [UUID: Observer]()
+    var currentPage: Int = 1
+    var lastPage: Int!
     var apiResponse: PopularMovieResult!
     var movies = [MovieArchiveCellDataModel]()
     
@@ -22,7 +24,7 @@ class MovieArchiveViewDataModel: Observable{
     var dataManager = DataManager.shared
     
     func fetchPopularMovies(){
-        dataManager.requestJsonData(from: API_URL_STRING) { (apiResponse) in
+        dataManager.requestJsonData(of: currentPage, from: API_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
                 self.apiResponse = response
                 self.processResponse()
@@ -31,8 +33,19 @@ class MovieArchiveViewDataModel: Observable{
         }
     }
     
+    func gotoPrevPage() {
+        currentPage -= 1
+        fetchPopularMovies()
+    }
+    
+    func gotoNextPage() {
+        currentPage += 1
+        fetchPopularMovies()
+    }
+    
     func processResponse(){
         movies = apiResponse.results.map() { MovieArchiveCellDataModel(movieInfo: $0) }
+        lastPage = apiResponse.total_pages
     }
     
     //Getter Methods
@@ -57,8 +70,8 @@ class MovieArchiveViewDataModel: Observable{
         return observerID
     }
     
-    func unsubscribe(observerID : UUID) {
-        self.observers.removeValue(forKey: observerID)
+    func unsubscribe(id: UUID) {
+        self.observers.removeValue(forKey: id)
     }
     
     func notifyObservers() {

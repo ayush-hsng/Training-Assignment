@@ -15,22 +15,51 @@ import UIKit
 class MovieArchiveViewController: UIViewController {
     
     @IBOutlet weak var archiveTableView: UITableView!
+    @IBOutlet weak var pageDescriptionLabel: UILabel!
+    @IBOutlet weak var prevPageButton: UIButton!
+    @IBOutlet weak var nextPageButton: UIButton!
     
     var viewDataModel : MovieArchiveViewDataModel!
     var observerID: UUID!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.disablePagination()
         self.archiveTableView.delegate = self
         self.archiveTableView.dataSource = self
         
-        viewDataModel = MovieArchiveViewDataModel()
-        self.observerID = viewDataModel.subscribe(observer: self)
-        viewDataModel.fetchPopularMovies()
+        self.viewDataModel = MovieArchiveViewDataModel()
+        self.observerID = self.viewDataModel.subscribe(observer: self)
+        self.viewDataModel.fetchPopularMovies()
 
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func prevPageButtonTapped(_ sender: UIButton) {
+        disablePagination()
+        viewDataModel.gotoPrevPage()
+    }
+    
+    @IBAction func nextPageButtonTapped(_ sender: UIButton) {
+        disablePagination()
+        viewDataModel.gotoNextPage()
+    }
+    
+    func disablePagination(){
+        prevPageButton.isEnabled = false
+        nextPageButton.isEnabled = false
+    }
+    
+    func handlePagination(currentPage: Int, lastPage: Int){
+        self.pageDescriptionLabel.text = String(currentPage)
+        if currentPage > 1 {
+            prevPageButton.isEnabled = true
+        }
+        if currentPage < lastPage {
+            nextPageButton.isEnabled = true
+        }
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CheckMovieSegue" {
@@ -58,7 +87,6 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
         }
         
         cell.cellDataModel = viewDataModel.getMovieInfo(ofIndex: indexPath.row)
-        
         cell.setCellElements()
         
         return cell
@@ -72,10 +100,13 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
     }
 }
 
-extension MovieArchiveViewController: Observer {
+extension MovieArchiveViewController: IndetifiableObserver {
+    
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
             self.archiveTableView.reloadData()
+            self.pageDescriptionLabel.text = String(self.viewDataModel.currentPage)
+            self.handlePagination(currentPage: self.viewDataModel.currentPage, lastPage: self.viewDataModel.lastPage)
         }
     }
 }

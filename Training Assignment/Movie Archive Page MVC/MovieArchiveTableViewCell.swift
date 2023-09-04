@@ -48,6 +48,5 @@ class MovieArchiveTableViewCell: UITableViewCell {
         let posterHeight = self.moviePosterImageView.frame.height
         let cornerRadius = posterHeight / 15
         self.moviePosterImageView.layer.cornerRadius = cornerRadius
-        
     }
 }

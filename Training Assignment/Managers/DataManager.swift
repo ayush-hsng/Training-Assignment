@@ -24,7 +24,7 @@ class DataManager {
     
     init() { }
     
-    func requestJsonData(of page: Int = 1 ,from apiUrlString: String, completionhandler: @escaping (PopularMovieResult?)->(Void)) {
+    func requestJsonData(of page: Int = 1,from apiUrlString: String, completionhandler: @escaping (PopularMovieResult?)->(Void)) {
         
         let queryList = [   "api_key" : API_KEY,
                             "language" : LANG_CODE,
@@ -38,8 +38,13 @@ class DataManager {
         if let request = requestBuilder.getRequest() {
             networkHandler.fetchData(using: request) { (data) in
                 if let jsonData = data {
-                    let responseData = try? self.decoder.decode(PopularMovieResult.self, from: jsonData)
-                    completionhandler(responseData)
+                    do {
+                        let responseData = try self.decoder.decode(PopularMovieResult.self, from: jsonData)
+                        completionhandler(responseData)
+                    }catch {
+                        print("\(error)")
+                    }
+                    
                 }
             }
         }

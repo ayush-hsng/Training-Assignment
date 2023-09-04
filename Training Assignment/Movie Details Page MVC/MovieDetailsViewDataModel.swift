@@ -87,8 +87,8 @@ class MovieDetailsViewDataModel: Observable {
         return observerID
     }
     
-    func unsubscribe(observerID : UUID) {
-        self.observers.removeValue(forKey: observerID)
+    func unsubscribe(id: UUID) {
+        self.observers.removeValue(forKey: id)
     }
     
     func notifyObservers() {
