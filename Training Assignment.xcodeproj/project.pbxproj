@@ -18,6 +18,8 @@
 		EB0780DC2AA84893000C4C77 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0780DB2AA84893000C4C77 /* Helper.swift */; };
 		EB0780E02AA84DCB000C4C77 /* MovieDBAPIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0780DF2AA84DCB000C4C77 /* MovieDBAPIHandler.swift */; };
 		EB0780E42AA851A9000C4C77 /* DataRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0780E32AA851A9000C4C77 /* DataRequestHandler.swift */; };
+		EB0780E62AA8622D000C4C77 /* MovieSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0780E52AA8622D000C4C77 /* MovieSearchViewController.swift */; };
+		EB2058CD2AA86FDE0052B30F /* MovieSearchViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2058CC2AA86FDE0052B30F /* MovieSearchViewDataModel.swift */; };
 		EB273F962A9CD94500C26507 /* MovieDBAPIDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */; };
 		EB273F982A9CDA1400C26507 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273F972A9CDA1400C26507 /* AppConstants.swift */; };
 		EB273FA42A9E114E00C26507 /* MovieArchiveViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB273FA32A9E114E00C26507 /* MovieArchiveViewDataModel.swift */; };
@@ -45,6 +47,8 @@
 		EB0780DB2AA84893000C4C77 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		EB0780DF2AA84DCB000C4C77 /* MovieDBAPIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBAPIHandler.swift; sourceTree = "<group>"; };
 		EB0780E32AA851A9000C4C77 /* DataRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequestHandler.swift; sourceTree = "<group>"; };
+		EB0780E52AA8622D000C4C77 /* MovieSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchViewController.swift; sourceTree = "<group>"; };
+		EB2058CC2AA86FDE0052B30F /* MovieSearchViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchViewDataModel.swift; sourceTree = "<group>"; };
 		EB273F952A9CD94400C26507 /* MovieDBAPIDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBAPIDataModels.swift; sourceTree = "<group>"; };
 		EB273F972A9CDA1400C26507 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		EB273FA32A9E114E00C26507 /* MovieArchiveViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieArchiveViewDataModel.swift; sourceTree = "<group>"; };
@@ -92,6 +96,15 @@
 				EB0780E32AA851A9000C4C77 /* DataRequestHandler.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		EB2058CB2AA86F920052B30F /* Movie Search Page MVC */ = {
+			isa = PBXGroup;
+			children = (
+				EB0780E52AA8622D000C4C77 /* MovieSearchViewController.swift */,
+				EB2058CC2AA86FDE0052B30F /* MovieSearchViewDataModel.swift */,
+			);
+			path = "Movie Search Page MVC";
 			sourceTree = "<group>";
 		};
 		EB273F9A2A9CDEFF00C26507 /* Managers */ = {
@@ -154,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				EB61E4E22A95C9BB00017AF9 /* Main.storyboard */,
+				EB2058CB2AA86F920052B30F /* Movie Search Page MVC */,
 				EB61E4DC2A95C9BB00017AF9 /* AppDelegate.swift */,
 				EB61E4DE2A95C9BB00017AF9 /* SceneDelegate.swift */,
 				EB0780C52AA44E07000C4C77 /* Types & Constants */,
@@ -243,6 +257,8 @@
 				EB0780CE2AA59840000C4C77 /* RequestBuilder.swift in Sources */,
 				EB61E5052A960AAD00017AF9 /* MovieArchiveTableViewCell.swift in Sources */,
 				EB273FA42A9E114E00C26507 /* MovieArchiveViewDataModel.swift in Sources */,
+				EB0780E62AA8622D000C4C77 /* MovieSearchViewController.swift in Sources */,
+				EB2058CD2AA86FDE0052B30F /* MovieSearchViewDataModel.swift in Sources */,
 				EB0780D82AA71336000C4C77 /* LoadingAnimationManager.swift in Sources */,
 				EB0780E42AA851A9000C4C77 /* DataRequestHandler.swift in Sources */,
 				EB0780C02AA304C5000C4C77 /* ImageManager.swift in Sources */,

@@ -18,11 +18,11 @@ class MovieArchiveViewDataModel: Observable{
     var currentPage: Int = 1
     var lastPage: Int!
     var popularMoviesResults: PopularMovieResult!
-    var moviesWithTitleResults: MovieSearchResult!
+//    var moviesWithTitleResults: MovieSearchResult!
     var movies = [MovieArchiveCellDataModel]()
     
     //dependency
-    var dataManager: MovieDBAPIHandler = DataManager.shared
+    var dataManager: PopularMoviesAPIHandler = DataManager.shared
     
     func fetchPopularMovies(fromHome: Bool = false){
         if fromHome {
@@ -37,16 +37,7 @@ class MovieArchiveViewDataModel: Observable{
         }
     }
     
-    func fetchMovisWithTitle(title: String) {
-        dataManager.requestMovieWithTitle(withTitle: title, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
-            if let response = apiResponse {
-                self.moviesWithTitleResults = response
-                self.processMoviesWithTitleResults()
-                self.notifyObservers()
-            }
-        }
 
-    }
     
     func gotoPrevPage() {
         currentPage -= 1
@@ -60,11 +51,6 @@ class MovieArchiveViewDataModel: Observable{
     
     func processPopularMoviesResults(){
         movies = popularMoviesResults.results.map() { MovieArchiveCellDataModel(movieInfo: $0) }
-        lastPage = popularMoviesResults.total_pages
-    }
-    
-    func processMoviesWithTitleResults(){
-        movies = moviesWithTitleResults.results.map() { MovieArchiveCellDataModel(movieInfo: $0) }
         lastPage = popularMoviesResults.total_pages
     }
     

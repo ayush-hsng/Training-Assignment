@@ -18,7 +18,6 @@ class MovieArchiveViewController: UIViewController{
     @IBOutlet weak var pageDescriptionLabel: UILabel!
     @IBOutlet weak var prevPageButton: UIButton!
     @IBOutlet weak var nextPageButton: UIButton!
-    @IBOutlet weak var searchTextField: UITextField!
     
     var loadingAnimationManager: LoadingAnimationManager!
     var viewDataModel : MovieArchiveViewDataModel!
@@ -29,10 +28,8 @@ class MovieArchiveViewController: UIViewController{
     
         self.archiveTableView.delegate = self
         self.archiveTableView.dataSource = self
-        self.searchTextField.delegate = self
         
         // Do any additional setup after loading the view.
-        self.searchTextField.placeholder = "Search For Movies Titles"
         self.setLoader()
         self.addLoader()
         
@@ -40,16 +37,6 @@ class MovieArchiveViewController: UIViewController{
     }
     
     //Action Outlets
-    
-    @IBAction func searchButtonTapped(_ sender: UIButton) {
-        self.addLoader()
-        let movieTitle = self.searchTextField.text ?? ""
-        if movieTitle.isEmpty {
-            viewDataModel.fetchPopularMovies(fromHome: true)
-        }else{
-            viewDataModel.fetchMovisWithTitle(title: movieTitle)
-        }
-    }
     
     
     @IBAction func prevPageButtonTapped(_ sender: UIButton) {
@@ -151,7 +138,11 @@ extension MovieArchiveViewController: IndetifiableObserver {
     
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
+            
             self.archiveTableView.reloadData()
+            let topRow = IndexPath(row: 0, section: 0)
+                                       
+            self.archiveTableView.scrollToRow(at: topRow,at: .top,animated: false)
             self.pageDescriptionLabel.text = String(self.viewDataModel.currentPage)
             self.handlePagination(currentPage: self.viewDataModel.currentPage, lastPage: self.viewDataModel.lastPage)
             self.removeLoader()

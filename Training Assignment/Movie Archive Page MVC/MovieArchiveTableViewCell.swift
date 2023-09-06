@@ -37,9 +37,11 @@ class MovieArchiveTableViewCell: UITableViewCell {
         self.movieTitleLabel.text = self.cellDataModel.getTitle()
         self.movieOverviewLabel.text = self.cellDataModel.getOverview()
         self.moviePosterImageView.image = imageLoader.getPlaceholderImage()
-        imageLoader.loadImage(from: Helper.getImageUrlFrom(moviePoster: self.cellDataModel.posterImagePath)) { (image) in
-            DispatchQueue.main.async {
-                self.moviePosterImageView.image = image
+        if !self.cellDataModel.getPosterFile().isEmpty {
+            imageLoader.loadImage(from: Helper.getImageUrlFrom(moviePoster: self.cellDataModel.posterImagePath)) { (image) in
+                DispatchQueue.main.async {
+                    self.moviePosterImageView.image = image
+                }
             }
         }
     }

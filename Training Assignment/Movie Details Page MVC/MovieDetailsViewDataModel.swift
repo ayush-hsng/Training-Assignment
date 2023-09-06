@@ -46,11 +46,15 @@ class MovieDetailsViewDataModel: Observable {
     //Setter Methods
     
     func setPoster(){
-        ImageManager.shared.loadImage(from: Helper.getImageUrlFrom(moviePoster: movieInfo.posterImagePath)) { (image) in
-            self.moviePoster = image
+        if self.movieInfo.posterImagePath.isEmpty {
+            self.moviePoster = ImageManager.shared.getPlaceholderImage()
             self.notifyObservers()
+        }else {
+            ImageManager.shared.loadImage(from: Helper.getImageUrlFrom(moviePoster: movieInfo.posterImagePath)) { (image) in
+                self.moviePoster = image
+                self.notifyObservers()
+            }
         }
-        
     }
     
     //Getter Methods
