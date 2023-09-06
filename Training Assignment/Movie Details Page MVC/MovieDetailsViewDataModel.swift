@@ -24,12 +24,12 @@ class MovieDetailsViewDataModel: Observable {
         var rating: Double
         
         init(_ movie: APIMovie){
-            title = movie.title
-            overview = movie.overview
-            releaseDate = movie.release_date
-            popularity = movie.popularity
-            posterImagePath = movie.poster_path
-            rating = movie.vote_average
+            title = movie.title ?? ""
+            overview = movie.overview ?? ""
+            releaseDate = movie.release_date ?? ""
+            popularity = movie.popularity ?? -1
+            posterImagePath = movie.poster_path ?? ""
+            rating = movie.vote_average ?? -1
         }
     }
     
@@ -46,7 +46,7 @@ class MovieDetailsViewDataModel: Observable {
     //Setter Methods
     
     func setPoster(){
-        ImageLoadManager.shared.loadImage(of: movieInfo.posterImagePath) { (image) in
+        ImageManager.shared.loadImage(from: Helper.getImageUrlFrom(moviePoster: movieInfo.posterImagePath)) { (image) in
             self.moviePoster = image
             self.notifyObservers()
         }
@@ -68,10 +68,16 @@ class MovieDetailsViewDataModel: Observable {
     }
     
     func getPopularity() -> String {
+        if movieInfo.popularity == -1 {
+            return ""
+        }
         return String(movieInfo.popularity)
     }
     
     func getRating() -> String {
+        if movieInfo.rating == -1 {
+            return ""
+        }
         return String(movieInfo.rating)
     }
     

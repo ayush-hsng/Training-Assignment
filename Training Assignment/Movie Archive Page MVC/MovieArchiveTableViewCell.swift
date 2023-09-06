@@ -4,7 +4,10 @@
 //
 //  Created by Ayush Kumar Sinha on 23/08/23.
 //
-
+// File Responsibility - Define the Custom Cell Class, which will be coding compliant to Movie Archive Table View Cell
+//      * Render Data from Model provided by View Controller *
+//      * Customise Cell Elements( Interface) *
+//      * Reset cell data while dequeing/reusing *
 
 import UIKit
 
@@ -16,11 +19,7 @@ class MovieArchiveTableViewCell: UITableViewCell {
     
     //Dependency
     var cellDataModel: MovieArchiveCellDataModel!
-    var imageLoader = ImageLoadManager.shared
-    
-    override func prepareForReuse() {
-        self.moviePosterImageView.image = nil
-    }
+    var imageLoader: ImageLoader = ImageManager.shared
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +36,8 @@ class MovieArchiveTableViewCell: UITableViewCell {
     func setCellElements(){
         self.movieTitleLabel.text = self.cellDataModel.getTitle()
         self.movieOverviewLabel.text = self.cellDataModel.getOverview()
-        imageLoader.loadImage(of: cellDataModel.getPosterFile()) { (image) in
+        self.moviePosterImageView.image = imageLoader.getPlaceholderImage()
+        imageLoader.loadImage(from: Helper.getImageUrlFrom(moviePoster: self.cellDataModel.posterImagePath)) { (image) in
             DispatchQueue.main.async {
                 self.moviePosterImageView.image = image
             }

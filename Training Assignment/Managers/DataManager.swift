@@ -13,22 +13,18 @@
 import Foundation
 import UIKit
 
-class DataManager {
+class DataManager: MovieDBAPIHandler, DataRequestHandler {
+    
     static let shared = DataManager()
     
     //Dependencies
-    var requestBuilder : RequestBuilder!
-    var networkHandler = NetworkHandler.shared
-    var decoder = JSONDecoder()
-    let session = URLSession.shared
+    var requestBuilder: RequestBuilder!
+    var networkHandler: NetworkHandler = NetworkHandler.shared
+    var decoder: JSONDecoder = JSONDecoder()
     
     init() { }
     
-    func requestJsonData(of page: Int = 1,from apiUrlString: String, completionhandler: @escaping (PopularMovieResult?)->(Void)) {
-        
-        let queryList = [   "api_key" : API_KEY,
-                            "language" : LANG_CODE,
-                            "page" : String(page)]
+    func requestJsonData(from apiUrlString: String, using queryList: [String: String], onCompletion: @escaping (Data?)->(Void)) {
         
         requestBuilder = RequestBuilder(baseUrl: apiUrlString)
         requestBuilder.setQueryParameters(queryList: queryList)
@@ -37,29 +33,50 @@ class DataManager {
         
         if let request = requestBuilder.getRequest() {
             networkHandler.fetchData(using: request) { (data) in
-                if let jsonData = data {
-                    do {
-                        let responseData = try self.decoder.decode(PopularMovieResult.self, from: jsonData)
-                        completionhandler(responseData)
-                    }catch {
-                        print("\(error)")
-                    }
-                    
-                }
+                onCompletion(data)
             }
         }
     }
     
-    func requestImageData(from imageFile: String,completionHandler: @escaping (UIImage?) -> (Void)){
+    func requestImageData(from imageUrl: String,completionHandler: @escaping (UIImage?) -> (Void)){
         
-        let urlString = POSTER_IMAGE_BASE_PATH + imageFile
-        requestBuilder = RequestBuilder(baseUrl: urlString)
+        requestBuilder = RequestBuilder(baseUrl: imageUrl)
         
         if let request = requestBuilder.getRequest() {
             networkHandler.fetchData(using: request) { (data) in
                 if let imageData = data {
                     completionHandler(UIImage(data: imageData))
                 }
+            }
+        }
+        
+    }
+    
+    func requestPopularMovies(byPage page: Int, fromAPI urlString: String, onCompletion: @escaping (PopularMovieResult?)->(Void)){
+        let queryList = [   "api_key" : API_KEY,
+                            "language" : LANG_CODE,
+                            "page" : String(page)]
+        self.requestJsonData(from: urlString, using: queryList) { data in
+            if let jsonData = data {
+                let responseData = try? self.decoder.decode(PopularMovieResult.self, from: jsonData)
+                onCompletion(responseData)
+            }else {
+                onCompletion(nil)
+            }
+        }
+    }
+    
+    func requestMovieWithTitle(withTitle title: String, fromAPI urlString: String, onCompletion: @escaping (MovieSearchResult?)->(Void)){
+        let queryList = [   "api_key" : API_KEY,
+                            "language" : LANG_CODE,
+                            "page" : "1",
+                            "query" : title]
+        self.requestJsonData(from: urlString, using: queryList) { data in
+            if let jsonData = data {
+                let responseData = try? self.decoder.decode(MovieSearchResult.self, from: jsonData)
+                onCompletion(responseData)
+            }else {
+                onCompletion(nil)
             }
         }
         

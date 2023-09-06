@@ -13,12 +13,25 @@
 import Foundation
 import UIKit
 
-class ImageLoadManager {
-    static let shared = ImageLoadManager()
+class ImageManager: ImageLoader {
+    static let shared = ImageManager()
     let dataManager = DataManager.shared
     var imageCache = [String: UIImage]()
     
     private init(){   }
+    
+    func loadImage(from urlString: String, onCompletion: @escaping (UIImage) -> (Void)) {
+        guard let image = imageCache[urlString] else {
+            dataManager.requestImageData(from: urlString){ (image) in
+                if let image = image {
+                    self.imageCache[urlString] = image
+                }
+                onCompletion(self.getImage(from: image))
+            }
+            return
+        }
+        onCompletion(image)
+    }
     
     func loadImage(of filename: String, onCompletion: @escaping (UIImage) -> (Void)){
         guard let image = imageCache[filename] else {

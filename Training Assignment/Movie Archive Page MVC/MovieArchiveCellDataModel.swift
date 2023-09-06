@@ -18,9 +18,9 @@ class MovieArchiveCellDataModel {
     var posterImagePath: String
     
     init(movieInfo: APIMovie) {
-        self.title = movieInfo.title
-        self.overview = movieInfo.overview
-        self.posterImagePath = movieInfo.poster_path
+        self.title = movieInfo.title ?? ""
+        self.overview = movieInfo.overview ?? ""
+        self.posterImagePath = movieInfo.poster_path  ?? ""
     }
     
     //getters

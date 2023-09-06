@@ -17,20 +17,35 @@ class MovieArchiveViewDataModel: Observable{
     var observers = [UUID: Observer]()
     var currentPage: Int = 1
     var lastPage: Int!
-    var apiResponse: PopularMovieResult!
+    var popularMoviesResults: PopularMovieResult!
+    var moviesWithTitleResults: MovieSearchResult!
     var movies = [MovieArchiveCellDataModel]()
     
     //dependency
-    var dataManager = DataManager.shared
+    var dataManager: MovieDBAPIHandler = DataManager.shared
     
-    func fetchPopularMovies(){
-        dataManager.requestJsonData(of: currentPage, from: API_URL_STRING) { (apiResponse) in
+    func fetchPopularMovies(fromHome: Bool = false){
+        if fromHome {
+            self.currentPage = 1
+        }
+        dataManager.requestPopularMovies(byPage: currentPage, fromAPI: API_POPULAR_MOVIES_URL_STRING){ (apiResponse) in
             if let response = apiResponse {
-                self.apiResponse = response
-                self.processResponse()
+                self.popularMoviesResults = response
+                self.processPopularMoviesResults()
                 self.notifyObservers()
             }
         }
+    }
+    
+    func fetchMovisWithTitle(title: String) {
+        dataManager.requestMovieWithTitle(withTitle: title, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
+            if let response = apiResponse {
+                self.moviesWithTitleResults = response
+                self.processMoviesWithTitleResults()
+                self.notifyObservers()
+            }
+        }
+
     }
     
     func gotoPrevPage() {
@@ -43,15 +58,20 @@ class MovieArchiveViewDataModel: Observable{
         fetchPopularMovies()
     }
     
-    func processResponse(){
-        movies = apiResponse.results.map() { MovieArchiveCellDataModel(movieInfo: $0) }
-        lastPage = apiResponse.total_pages
+    func processPopularMoviesResults(){
+        movies = popularMoviesResults.results.map() { MovieArchiveCellDataModel(movieInfo: $0) }
+        lastPage = popularMoviesResults.total_pages
+    }
+    
+    func processMoviesWithTitleResults(){
+        movies = moviesWithTitleResults.results.map() { MovieArchiveCellDataModel(movieInfo: $0) }
+        lastPage = popularMoviesResults.total_pages
     }
     
     //Getter Methods
     
     func getMovieData(ofIndex index: Int) -> APIMovie {
-        return apiResponse.results[index]
+        return popularMoviesResults.results[index]
     }
     
     func getMovieInfo(ofIndex index: Int) -> MovieArchiveCellDataModel{

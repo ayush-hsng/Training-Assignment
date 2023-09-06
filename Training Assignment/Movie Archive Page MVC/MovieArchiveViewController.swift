@@ -12,40 +12,86 @@
 
 import UIKit
 
-class MovieArchiveViewController: UIViewController {
+class MovieArchiveViewController: UIViewController{
     
     @IBOutlet weak var archiveTableView: UITableView!
     @IBOutlet weak var pageDescriptionLabel: UILabel!
     @IBOutlet weak var prevPageButton: UIButton!
     @IBOutlet weak var nextPageButton: UIButton!
+    @IBOutlet weak var searchTextField: UITextField!
     
+    var loadingAnimationManager: LoadingAnimationManager!
     var viewDataModel : MovieArchiveViewDataModel!
     var observerID: UUID!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.disablePagination()
+    
         self.archiveTableView.delegate = self
         self.archiveTableView.dataSource = self
+        self.searchTextField.delegate = self
         
-        self.viewDataModel = MovieArchiveViewDataModel()
-        self.observerID = self.viewDataModel.subscribe(observer: self)
-        self.viewDataModel.fetchPopularMovies()
-
         // Do any additional setup after loading the view.
+        self.searchTextField.placeholder = "Search For Movies Titles"
+        self.setLoader()
+        self.addLoader()
+        
+        self.loadContent()
     }
     
+    //Action Outlets
+    
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        self.addLoader()
+        let movieTitle = self.searchTextField.text ?? ""
+        if movieTitle.isEmpty {
+            viewDataModel.fetchPopularMovies(fromHome: true)
+        }else{
+            viewDataModel.fetchMovisWithTitle(title: movieTitle)
+        }
+    }
+    
+    
     @IBAction func prevPageButtonTapped(_ sender: UIButton) {
-        disablePagination()
+        self.addLoader()
         viewDataModel.gotoPrevPage()
     }
     
     @IBAction func nextPageButtonTapped(_ sender: UIButton) {
-        disablePagination()
+        self.addLoader()
         viewDataModel.gotoNextPage()
     }
     
+    //Starting Point
+    
+    func loadContent() {
+        self.viewDataModel = MovieArchiveViewDataModel()
+        self.observerID = self.viewDataModel.subscribe(observer: self)
+        self.viewDataModel.fetchPopularMovies()
+        
+    }
+    
+    // Loading View Methods
+    
+    func setLoader(){
+        loadingAnimationManager = LoadingAnimationManager(superview: self.view)
+    }
+    
+    func addLoader(){
+        self.disablePagination()
+        self.view.addSubview(self.loadingAnimationManager.backgroundView)
+        self.view.addSubview(self.loadingAnimationManager.activityAnimation)
+    }
+    
+    func removeLoader(){
+        self.loadingAnimationManager.backgroundView.removeFromSuperview()
+        self.loadingAnimationManager.activityAnimation.removeFromSuperview()
+    }
+    
+    // Page Control Methods
+    
     func disablePagination(){
+        self.pageDescriptionLabel.text = ""
         prevPageButton.isEnabled = false
         nextPageButton.isEnabled = false
     }
@@ -60,6 +106,7 @@ class MovieArchiveViewController: UIViewController {
         }
     }
     
+    //Segue Method
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CheckMovieSegue" {
@@ -73,7 +120,7 @@ class MovieArchiveViewController: UIViewController {
 
 }
 
-extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate  {
+extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate   {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewDataModel.getMovieCount()
@@ -107,6 +154,7 @@ extension MovieArchiveViewController: IndetifiableObserver {
             self.archiveTableView.reloadData()
             self.pageDescriptionLabel.text = String(self.viewDataModel.currentPage)
             self.handlePagination(currentPage: self.viewDataModel.currentPage, lastPage: self.viewDataModel.lastPage)
+            self.removeLoader()
         }
     }
 }

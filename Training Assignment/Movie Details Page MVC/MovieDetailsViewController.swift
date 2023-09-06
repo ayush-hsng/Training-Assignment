@@ -28,10 +28,9 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.observerID = movieData.subscribe(observer: self)
-        movieData.setPoster()
         setInterface()
         setViewContent()
-        
+        movieData.setPoster()
         
         // Do any additional setup after loading the view.
     }
@@ -50,6 +49,7 @@ class MovieDetailsViewController: UIViewController {
         self.movieRatingLebel.text = self.movieData.getRating()
         self.popularityLabel.text = self.movieData.getPopularity()
         self.movieOverViewLabel.text = self.movieData.getOverview()
+        self.moviePosterImageView.image = ImageManager.shared.getPlaceholderImage()
     }
     
     /*
@@ -66,7 +66,6 @@ class MovieDetailsViewController: UIViewController {
 
 extension MovieDetailsViewController: Observer {
    
-    
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
             self.moviePosterImageView.image = self.movieData.moviePoster
