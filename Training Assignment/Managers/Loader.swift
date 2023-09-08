@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class Loader {
+class Loader: LoadingActivityHandler {
+    
     var frozenBackgroundView: UIView
     var activityAnimation: UIActivityIndicatorView
     
@@ -22,6 +23,11 @@ class Loader {
             height: 100)
         activityAnimation = UIActivityIndicatorView(frame: rectangularFrame)
         activityAnimation.startAnimating()
+    }
+    
+    func addLoader(onto superview: UIView) {
+        superview.addSubview(self.frozenBackgroundView)
+        superview.addSubview(self.activityAnimation)
     }
     
     func removeLoader() {

@@ -213,7 +213,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-ob-aPh">
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-ob-aPh">
                                 <rect key="frame" x="0.0" y="807.66666666666663" width="393" height="34.333333333333371"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEF-Qb-d1L">

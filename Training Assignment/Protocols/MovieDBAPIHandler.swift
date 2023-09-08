@@ -17,7 +17,7 @@ protocol PopularMoviesAPIHandler: APIResponseHandler {
 }
 
 protocol SearchMovieAPIHandler: APIResponseHandler {
-    func requestMovieWithTitle(withTitle title: String, fromAPI urlString: String, onCompletion: @escaping (MovieSearchResult?)->(Void))
+    func requestMovieWithTitle(withTitle title: String,byPage page : Int, fromAPI urlString: String, onCompletion: @escaping (MovieSearchResult?)->(Void))
 }
 
 protocol MovieDBAPIHandler: PopularMoviesAPIHandler, SearchMovieAPIHandler {

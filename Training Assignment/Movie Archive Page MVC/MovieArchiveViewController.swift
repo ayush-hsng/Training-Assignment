@@ -19,23 +19,23 @@ class MovieArchiveViewController: UIViewController{
     @IBOutlet weak var prevPageButton: UIButton!
     @IBOutlet weak var nextPageButton: UIButton!
     
-    //Compositions
+    // Compositions
     var observerID: UUID!
-    
-    //Dependencies
-    var loader: Loader!
+    var loader: LoadingActivityHandler!
     var viewDataModel : MovieArchiveViewDataModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        // Do any additional setup after loading the view.
         self.archiveTableView.delegate = self
         self.archiveTableView.dataSource = self
+        
+        // Instantiating compositions
         self.loader = Loader(superview: self.view)
+        self.viewDataModel = MovieArchiveViewDataModel()
+        self.observerID = self.viewDataModel.subscribe(observer: self)
         
-        // Do any additional setup after loading the view.
-        
-        self.addLoader()
         self.loadContent()
     }
     
@@ -43,22 +43,26 @@ class MovieArchiveViewController: UIViewController{
     
     
     @IBAction func prevPageButtonTapped(_ sender: UIButton) {
-        self.addLoader()
+        self.loader.addLoader(onto: self.view)
+        self.disablePageControllers()
         viewDataModel.gotoPrevPage()
     }
     
     @IBAction func nextPageButtonTapped(_ sender: UIButton) {
-        self.addLoader()
+        self.loader.addLoader(onto: self.view)
+        self.disablePageControllers()
         viewDataModel.gotoNextPage()
     }
     
     func loadContent() {
-        self.viewDataModel = MovieArchiveViewDataModel()
-        self.observerID = self.viewDataModel.subscribe(observer: self)
+        self.loader.addLoader(onto: self.view)
+        self.disablePageControllers()
         self.viewDataModel.fetchPopularMovies()
     }
     
     func loadPage() {
+        self.archiveTableView.reloadData()
+        self.scrollToTop()
         self.pageDescriptionLabel.text = String(self.viewDataModel.currentPage)
         self.enablePageControllers(currentPage: self.viewDataModel.currentPage, lastPage: self.viewDataModel.lastPage)
     }
@@ -66,14 +70,6 @@ class MovieArchiveViewController: UIViewController{
     func scrollToTop(){
         let topRow = IndexPath(row: 0, section: 0)
         self.archiveTableView.scrollToRow(at: topRow,at: .top,animated: false)
-    }
-    
-    // Loading View Methods
-    
-    func addLoader(){
-        self.disablePageControllers()
-        self.view.addSubview(self.loader.frozenBackgroundView)
-        self.view.addSubview(self.loader.activityAnimation)
     }
     
     // Page Control Methods
@@ -138,9 +134,6 @@ extension MovieArchiveViewController: IndetifiableObserver {
     
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
-            self.archiveTableView.reloadData()
-            
-            self.scrollToTop()
             
             self.loadPage()
             

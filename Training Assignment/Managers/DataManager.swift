@@ -65,10 +65,10 @@ class DataManager: MovieDBAPIHandler, DataRequestHandler {
         }
     }
     
-    func requestMovieWithTitle(withTitle title: String, fromAPI urlString: String, onCompletion: @escaping (MovieSearchResult?)->(Void)){
+    func requestMovieWithTitle(withTitle title: String,byPage page: Int = 1, fromAPI urlString: String, onCompletion: @escaping (MovieSearchResult?)->(Void)){
         let queryList = [   "api_key" : API_KEY,
                             "language" : LANG_CODE,
-                            "page" : "1",
+                            "page" : "\(page)",
                             "query" : title]
         self.requestJsonData(from: urlString, using: queryList) { data in
             if let jsonData = data {

@@ -12,7 +12,7 @@
 import Foundation
 import UIKit
 
-class MovieDetailsViewDataModel: ViewDataModelProtocol{
+class MovieDetailsViewDataModel: Observable{
     var observers: [UUID: Observer]
     
     class MovieInfo {

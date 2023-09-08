@@ -13,12 +13,14 @@ class MovieSearchViewDataModel: Observable {
     var movies: [MoviesCellDataModel] = [MoviesCellDataModel]()
     var currentPage: Int = 1
     var lastPage: Int!
+    var searchText: String!
     
     //dependency
     var dataManager: SearchMovieAPIHandler = DataManager.shared
     
     func fetchMovisWithTitle(title: String) {
-        dataManager.requestMovieWithTitle(withTitle: title, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
+        self.searchText = title
+        dataManager.requestMovieWithTitle(withTitle: title,byPage: currentPage ,fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
                 self.searchMovieResults = response
                 self.processMoviesWithTitleResults()
@@ -26,6 +28,16 @@ class MovieSearchViewDataModel: Observable {
             }
         }
         
+    }
+
+    func gotoPrevPage() {
+        self.currentPage -= 1
+        self.fetchMovisWithTitle(title: self.searchText)
+    }
+    
+    func gotoNextPage() {
+        self.currentPage += 1
+        self.fetchMovisWithTitle(title: self.searchText)
     }
     
     func processMoviesWithTitleResults() {

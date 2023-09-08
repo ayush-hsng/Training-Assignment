@@ -15,6 +15,7 @@ class MovieSearchViewController: UIViewController {
     @IBOutlet weak var nextPageButton: UIButton!
     
     var observerID: UUID!
+    var loader: LoadingActivityHandler!
     var viewDataModel: MovieSearchViewDataModel!
     
     override func viewDidLoad() {
@@ -23,6 +24,7 @@ class MovieSearchViewController: UIViewController {
         self.searchResultsTableView.dataSource = self
         self.searchResultsTableView.delegate = self
         
+        self.loader = Loader(superview: self.view)
         self.viewDataModel = MovieSearchViewDataModel()
         self.observerID = self.viewDataModel.subscribe(observer: self)
 
@@ -30,11 +32,43 @@ class MovieSearchViewController: UIViewController {
     }
     
     @IBAction func searchMovieButtonTapped(_ sender: UIButton) {
+        self.loader.addLoader(onto: self.view)
         self.viewDataModel.fetchMovisWithTitle(title: self.searchTitleTextField.text ?? "")
     }
     @IBAction func gotoPrevPageButtonTapped(_ sender: UIButton) {
+        self.loader.addLoader(onto: self.view)
+        self.viewDataModel.gotoPrevPage()
     }
     @IBAction func gotoNextPageButtonTapped(_ sender: UIButton) {
+        self.loader.addLoader(onto: self.view)
+        self.viewDataModel.gotoNextPage()
+    }
+    
+    func scrollToTop(){
+        let topRow = IndexPath(row: 0, section: 0)
+        self.searchResultsTableView.scrollToRow(at: topRow,at: .top,animated: false)
+    }
+    
+    func loadPage() {
+        self.searchResultsTableView.reloadData()
+        self.scrollToTop()
+        self.pageDescriptionLabel.text = String(self.viewDataModel.currentPage)
+        self.enablePageControllers(currentPage: self.viewDataModel.currentPage, lastPage: self.viewDataModel.lastPage)
+    }
+    
+    func disablePageControllers(){
+        self.pageDescriptionLabel.text = ""
+        prevPageButton.isEnabled = false
+        nextPageButton.isEnabled = false
+    }
+    
+    func enablePageControllers(currentPage: Int, lastPage: Int){
+        if currentPage > 1 {
+            prevPageButton.isEnabled = true
+        }
+        if currentPage < lastPage {
+            nextPageButton.isEnabled = true
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,7 +115,9 @@ extension MovieSearchViewController: IndetifiableObserver {
 
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
-            self.searchResultsTableView.reloadData()
+            
+            self.loadPage()
+            self.loader.removeLoader()
         }
     }
 }
