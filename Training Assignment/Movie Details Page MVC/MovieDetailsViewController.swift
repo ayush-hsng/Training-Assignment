@@ -10,8 +10,9 @@
 
 import UIKit
 
-class MovieDetailsViewController: UIViewController {
-    var movieData: MovieDetailsViewDataModel!
+class MovieDetailsViewController: UIViewController{
+    
+    var viewDataModel: MovieDetailsViewDataModel!
     var observerID: UUID!
     
     @IBOutlet weak var moviePosterImageView: UIImageView!
@@ -27,10 +28,10 @@ class MovieDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.observerID = movieData.subscribe(observer: self)
+        self.observerID = viewDataModel.subscribe(observer: self)
         setInterface()
         setViewContent()
-        movieData.setPoster()
+        viewDataModel.setPoster()
         
         // Do any additional setup after loading the view.
     }
@@ -44,11 +45,11 @@ class MovieDetailsViewController: UIViewController {
     }
     
     func setViewContent(){
-        self.title = self.movieData.getTitle()
-        self.releaseDateLabel.text = self.movieData.getReleaseDate()
-        self.movieRatingLebel.text = self.movieData.getRating()
-        self.popularityLabel.text = self.movieData.getPopularity()
-        self.movieOverViewLabel.text = self.movieData.getOverview()
+        self.title = self.viewDataModel.getTitle()
+        self.releaseDateLabel.text = self.viewDataModel.getReleaseDate()
+        self.movieRatingLebel.text = self.viewDataModel.getRating()
+        self.popularityLabel.text = self.viewDataModel.getPopularity()
+        self.movieOverViewLabel.text = self.viewDataModel.getOverview()
         self.moviePosterImageView.image = ImageManager.shared.getPlaceholderImage()
     }
     
@@ -68,7 +69,7 @@ extension MovieDetailsViewController: Observer {
    
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
-            self.moviePosterImageView.image = self.movieData.moviePoster
+            self.moviePosterImageView.image = self.viewDataModel.moviePoster
         }
     }
 }

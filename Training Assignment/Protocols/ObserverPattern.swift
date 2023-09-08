@@ -22,12 +22,3 @@ protocol Observable {
     func unsubscribe(id: UUID)
     func notifyObservers()
 }
-
-//protocol DataModel {
-//    func setData()
-//    func processData()
-//}
-//
-//protocol ViewDataModel: Observer,DataModel {
-//    
-//}

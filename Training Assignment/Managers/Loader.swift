@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-class LoadingAnimationManager {
-    var backgroundView: UIView
+class Loader {
+    var frozenBackgroundView: UIView
     var activityAnimation: UIActivityIndicatorView
     
     init(superview: UIView){
-        backgroundView = UIView(frame: superview.frame)
-        backgroundView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        frozenBackgroundView = UIView(frame: superview.frame)
+        frozenBackgroundView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
         let rectangularFrame = CGRect(
             x: CGFloat((superview.frame.width) / 2 ) - 50,
             y: CGFloat((superview.frame.height) / 2 ) - 50,
@@ -22,5 +22,10 @@ class LoadingAnimationManager {
             height: 100)
         activityAnimation = UIActivityIndicatorView(frame: rectangularFrame)
         activityAnimation.startAnimating()
+    }
+    
+    func removeLoader() {
+        self.activityAnimation.removeFromSuperview()
+        self.frozenBackgroundView.removeFromSuperview()
     }
 }

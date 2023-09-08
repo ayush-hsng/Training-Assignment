@@ -10,10 +10,11 @@ import Foundation
 class MovieSearchViewDataModel: Observable {
     var observers: [UUID : Observer] = [UUID: Observer]()
     var searchMovieResults: MovieSearchResult!
-    var movies: [MovieArchiveCellDataModel] = [MovieArchiveCellDataModel]()
+    var movies: [MoviesCellDataModel] = [MoviesCellDataModel]()
     var currentPage: Int = 1
     var lastPage: Int!
     
+    //dependency
     var dataManager: SearchMovieAPIHandler = DataManager.shared
     
     func fetchMovisWithTitle(title: String) {
@@ -28,7 +29,7 @@ class MovieSearchViewDataModel: Observable {
     }
     
     func processMoviesWithTitleResults() {
-        self.movies = self.searchMovieResults.results.map() { MovieArchiveCellDataModel(movieInfo: $0) }
+        self.movies = self.searchMovieResults.results.map() { MoviesCellDataModel(movieInfo: $0) }
         self.currentPage = self.searchMovieResults.page
         self.lastPage = self.searchMovieResults.total_pages
     }
@@ -37,7 +38,7 @@ class MovieSearchViewDataModel: Observable {
         return searchMovieResults.results[index]
     }
     
-    func getMovieInfo(ofIndex index: Int) -> MovieArchiveCellDataModel{
+    func getMovieInfo(ofIndex index: Int) -> MoviesCellDataModel{
         return movies[index]
     }
     

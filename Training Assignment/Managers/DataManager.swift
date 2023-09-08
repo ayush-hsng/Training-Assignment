@@ -14,7 +14,6 @@ import Foundation
 import UIKit
 
 class DataManager: MovieDBAPIHandler, DataRequestHandler {
-    
     static let shared = DataManager()
     
     //Dependencies

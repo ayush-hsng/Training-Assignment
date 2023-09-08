@@ -19,7 +19,7 @@ class MovieArchiveViewDataModel: Observable{
     var lastPage: Int!
     var popularMoviesResults: PopularMovieResult!
 //    var moviesWithTitleResults: MovieSearchResult!
-    var movies = [MovieArchiveCellDataModel]()
+    var movies = [MoviesCellDataModel]()
     
     //dependency
     var dataManager: PopularMoviesAPIHandler = DataManager.shared
@@ -50,7 +50,7 @@ class MovieArchiveViewDataModel: Observable{
     }
     
     func processPopularMoviesResults(){
-        movies = popularMoviesResults.results.map() { MovieArchiveCellDataModel(movieInfo: $0) }
+        movies = popularMoviesResults.results.map() { MoviesCellDataModel(movieInfo: $0) }
         lastPage = popularMoviesResults.total_pages
     }
     
@@ -60,7 +60,7 @@ class MovieArchiveViewDataModel: Observable{
         return popularMoviesResults.results[index]
     }
     
-    func getMovieInfo(ofIndex index: Int) -> MovieArchiveCellDataModel{
+    func getMovieInfo(ofIndex index: Int) -> MoviesCellDataModel{
         return movies[index]
     }
     

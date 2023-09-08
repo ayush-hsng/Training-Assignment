@@ -11,14 +11,14 @@
 
 import UIKit
 
-class MovieArchiveTableViewCell: UITableViewCell {
+class MoviesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var moviePosterImageView: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieOverviewLabel: UILabel!
     
     //Dependency
-    var cellDataModel: MovieArchiveCellDataModel!
+    var cellDataModel: MoviesCellDataModel!
     var imageLoader: ImageLoader = ImageManager.shared
     
     override func awakeFromNib() {

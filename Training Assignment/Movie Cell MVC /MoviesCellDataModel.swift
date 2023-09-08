@@ -11,7 +11,7 @@
 import Foundation
 import UIKit
 
-class MovieArchiveCellDataModel {
+class MoviesCellDataModel {
     
     var title: String
     var overview: String

@@ -19,20 +19,23 @@ class MovieArchiveViewController: UIViewController{
     @IBOutlet weak var prevPageButton: UIButton!
     @IBOutlet weak var nextPageButton: UIButton!
     
-    var loadingAnimationManager: LoadingAnimationManager!
-    var viewDataModel : MovieArchiveViewDataModel!
+    //Compositions
     var observerID: UUID!
+    
+    //Dependencies
+    var loader: Loader!
+    var viewDataModel : MovieArchiveViewDataModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
         self.archiveTableView.delegate = self
         self.archiveTableView.dataSource = self
+        self.loader = Loader(superview: self.view)
         
         // Do any additional setup after loading the view.
-        self.setLoader()
-        self.addLoader()
         
+        self.addLoader()
         self.loadContent()
     }
     
@@ -49,42 +52,39 @@ class MovieArchiveViewController: UIViewController{
         viewDataModel.gotoNextPage()
     }
     
-    //Starting Point
-    
     func loadContent() {
         self.viewDataModel = MovieArchiveViewDataModel()
         self.observerID = self.viewDataModel.subscribe(observer: self)
         self.viewDataModel.fetchPopularMovies()
-        
+    }
+    
+    func loadPage() {
+        self.pageDescriptionLabel.text = String(self.viewDataModel.currentPage)
+        self.enablePageControllers(currentPage: self.viewDataModel.currentPage, lastPage: self.viewDataModel.lastPage)
+    }
+    
+    func scrollToTop(){
+        let topRow = IndexPath(row: 0, section: 0)
+        self.archiveTableView.scrollToRow(at: topRow,at: .top,animated: false)
     }
     
     // Loading View Methods
     
-    func setLoader(){
-        loadingAnimationManager = LoadingAnimationManager(superview: self.view)
-    }
-    
     func addLoader(){
-        self.disablePagination()
-        self.view.addSubview(self.loadingAnimationManager.backgroundView)
-        self.view.addSubview(self.loadingAnimationManager.activityAnimation)
-    }
-    
-    func removeLoader(){
-        self.loadingAnimationManager.backgroundView.removeFromSuperview()
-        self.loadingAnimationManager.activityAnimation.removeFromSuperview()
+        self.disablePageControllers()
+        self.view.addSubview(self.loader.frozenBackgroundView)
+        self.view.addSubview(self.loader.activityAnimation)
     }
     
     // Page Control Methods
     
-    func disablePagination(){
+    func disablePageControllers(){
         self.pageDescriptionLabel.text = ""
         prevPageButton.isEnabled = false
         nextPageButton.isEnabled = false
     }
     
-    func handlePagination(currentPage: Int, lastPage: Int){
-        self.pageDescriptionLabel.text = String(currentPage)
+    func enablePageControllers(currentPage: Int, lastPage: Int){
         if currentPage > 1 {
             prevPageButton.isEnabled = true
         }
@@ -99,7 +99,7 @@ class MovieArchiveViewController: UIViewController{
         if segue.identifier == "CheckMovieSegue" {
             if let destinationVC = segue.destination as? MovieDetailsViewController {
                 if let viewData = sender as? MovieDetailsViewDataModel {
-                    destinationVC.movieData = viewData
+                    destinationVC.viewDataModel = viewData
                 }
             }
         }
@@ -116,7 +116,7 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = archiveTableView.dequeueReusableCell(withIdentifier: "ArchiveCell", for: indexPath)
         
-        guard let cell = cell as? MovieArchiveTableViewCell else {
+        guard let cell = cell as? MoviesTableViewCell else {
             return cell
         }
         
@@ -138,14 +138,13 @@ extension MovieArchiveViewController: IndetifiableObserver {
     
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
-            
             self.archiveTableView.reloadData()
-            let topRow = IndexPath(row: 0, section: 0)
-                                       
-            self.archiveTableView.scrollToRow(at: topRow,at: .top,animated: false)
-            self.pageDescriptionLabel.text = String(self.viewDataModel.currentPage)
-            self.handlePagination(currentPage: self.viewDataModel.currentPage, lastPage: self.viewDataModel.lastPage)
-            self.removeLoader()
+            
+            self.scrollToTop()
+            
+            self.loadPage()
+            
+            self.loader.removeLoader()
         }
     }
 }
