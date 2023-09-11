@@ -51,6 +51,10 @@ class MovieSearchViewDataModel: Observable {
         return movies.count
     }
     
+    func hasLoadablePage() -> Bool {
+        return loadedPage < lastPage
+    }
+    
     func subscribe(observer: Observer) -> UUID {
         let uuid = UUID()
         self.observers[uuid] = observer

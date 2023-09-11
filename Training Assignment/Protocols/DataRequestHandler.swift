@@ -17,7 +17,7 @@ protocol JsonDataRequestHandler: RequestHandler{
 }
 
 protocol ImageDataRequestHandler: RequestHandler {
-    func requestImageData(from imageUrl: String,completionHandler: @escaping (UIImage?) -> (Void))
+    func requestImageData(from imageUrl: String,onCompletion: @escaping (UIImage?) -> (Void))
 }
 
 protocol DataRequestHandler: JsonDataRequestHandler, ImageDataRequestHandler {

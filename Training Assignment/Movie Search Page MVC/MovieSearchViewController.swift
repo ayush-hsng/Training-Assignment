@@ -74,12 +74,16 @@ extension MovieSearchViewController: UITableViewDataSource, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastRowIndex = tableView.numberOfRows(inSection: indexPath.section) - 1
-        if indexPath.row == lastRowIndex {
+        if (indexPath.row == lastRowIndex && self.viewDataModel.hasLoadablePage()) {
             let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: cell.bounds.height))
             spinner.startAnimating()
             tableView.tableFooterView = spinner
             tableView.tableFooterView?.isHidden = false
-            self.viewDataModel.loadNextPage(for: self.searchTitleTextField.text ?? "")        }
+            self.viewDataModel.loadNextPage(for: self.searchTitleTextField.text ?? "")
+            
+        }else {
+            self.searchResultsTableView.tableFooterView = nil
+        }
     }
     
 }

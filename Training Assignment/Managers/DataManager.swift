@@ -37,14 +37,14 @@ class DataManager: MovieDBAPIHandler, DataRequestHandler {
         }
     }
     
-    func requestImageData(from imageUrl: String,completionHandler: @escaping (UIImage?) -> (Void)){
+    func requestImageData(from imageUrl: String,onCompletion: @escaping (UIImage?) -> (Void)){
         
         requestBuilder = RequestBuilder(baseUrl: imageUrl)
         
         if let request = requestBuilder.getRequest() {
             networkHandler.fetchData(using: request) { (data) in
                 if let imageData = data {
-                    completionHandler(UIImage(data: imageData))
+                    onCompletion(UIImage(data: imageData))
                 }
             }
         }
@@ -55,7 +55,7 @@ class DataManager: MovieDBAPIHandler, DataRequestHandler {
         let queryList = [   "api_key" : API_KEY,
                             "language" : LANG_CODE,
                             "page" : String(page)]
-        self.requestJsonData(from: urlString, using: queryList) { data in
+        self.requestJsonData(from: urlString, using: queryList) { (data) in
             if let jsonData = data {
                 let responseData = try? self.decoder.decode(PopularMovieResult.self, from: jsonData)
                 onCompletion(responseData)

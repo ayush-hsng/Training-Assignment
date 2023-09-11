@@ -58,6 +58,10 @@ class MovieArchiveViewDataModel: Observable{
         return movies.count
     }
     
+    func hasLoadablePage() -> Bool {
+        return loadedPage < lastPage
+    }
+    
     // Observable Protocol methoods
     
     func subscribe(observer: Observer) -> UUID{
