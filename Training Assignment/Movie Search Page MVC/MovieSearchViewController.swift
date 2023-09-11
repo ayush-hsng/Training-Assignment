@@ -15,7 +15,7 @@ class MovieSearchViewController: UIViewController {
     @IBOutlet weak var nextPageButton: UIButton!
     
     var observerID: UUID!
-    var loader: LoadingActivityHandler!
+    var loader: Loader!
     var viewDataModel: MovieSearchViewDataModel!
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class MovieSearchViewController: UIViewController {
         self.searchResultsTableView.dataSource = self
         self.searchResultsTableView.delegate = self
         
-        self.loader = Loader(superview: self.view)
+        self.loader = Loader()
         self.viewDataModel = MovieSearchViewDataModel()
         self.observerID = self.viewDataModel.subscribe(observer: self)
 
@@ -32,15 +32,15 @@ class MovieSearchViewController: UIViewController {
     }
     
     @IBAction func searchMovieButtonTapped(_ sender: UIButton) {
-        self.loader.addLoader(onto: self.view)
+        present(loader.loadingAlert,animated: true)
         self.viewDataModel.fetchMovisWithTitle(title: self.searchTitleTextField.text ?? "")
     }
     @IBAction func gotoPrevPageButtonTapped(_ sender: UIButton) {
-        self.loader.addLoader(onto: self.view)
+        present(loader.loadingAlert,animated: true)
         self.viewDataModel.gotoPrevPage()
     }
     @IBAction func gotoNextPageButtonTapped(_ sender: UIButton) {
-        self.loader.addLoader(onto: self.view)
+        present(loader.loadingAlert,animated: true)
         self.viewDataModel.gotoNextPage()
     }
     
@@ -117,7 +117,7 @@ extension MovieSearchViewController: IndetifiableObserver {
         DispatchQueue.main.async {
             
             self.loadPage()
-            self.loader.removeLoader()
+            self.loader.loadingAlert.dismiss(animated: true)
         }
     }
 }

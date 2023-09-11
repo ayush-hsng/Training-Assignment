@@ -21,7 +21,7 @@ class MovieArchiveViewController: UIViewController{
     
     // Compositions
     var observerID: UUID!
-    var loader: LoadingActivityHandler!
+    var loader: Loader!
     var viewDataModel : MovieArchiveViewDataModel!
 
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class MovieArchiveViewController: UIViewController{
         self.archiveTableView.dataSource = self
         
         // Instantiating compositions
-        self.loader = Loader(superview: self.view)
+        self.loader = Loader()
         self.viewDataModel = MovieArchiveViewDataModel()
         self.observerID = self.viewDataModel.subscribe(observer: self)
         
@@ -43,19 +43,19 @@ class MovieArchiveViewController: UIViewController{
     
     
     @IBAction func prevPageButtonTapped(_ sender: UIButton) {
-        self.loader.addLoader(onto: self.view)
+        present(loader.loadingAlert,animated: true)
         self.disablePageControllers()
         viewDataModel.gotoPrevPage()
     }
     
     @IBAction func nextPageButtonTapped(_ sender: UIButton) {
-        self.loader.addLoader(onto: self.view)
+        present(loader.loadingAlert,animated: true)
         self.disablePageControllers()
         viewDataModel.gotoNextPage()
     }
     
     func loadContent() {
-        self.loader.addLoader(onto: self.view)
+        present(loader.loadingAlert,animated: true)
         self.disablePageControllers()
         self.viewDataModel.fetchPopularMovies()
     }
@@ -137,7 +137,7 @@ extension MovieArchiveViewController: IndetifiableObserver {
             
             self.loadPage()
             
-            self.loader.removeLoader()
+            self.loader.loadingAlert.dismiss(animated: true)
         }
     }
 }

@@ -8,30 +8,15 @@
 import Foundation
 import UIKit
 
-class Loader: LoadingActivityHandler {
+class Loader {
+    var loadingAlert: UIAlertController
+    var spinner: UIActivityIndicatorView
     
-    var frozenBackgroundView: UIView
-    var activityAnimation: UIActivityIndicatorView
-    
-    init(superview: UIView){
-        frozenBackgroundView = UIView(frame: superview.frame)
-        frozenBackgroundView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
-        let rectangularFrame = CGRect(
-            x: CGFloat((superview.frame.width) / 2 ) - 50,
-            y: CGFloat((superview.frame.height) / 2 ) - 50,
-            width: 100,
-            height: 100)
-        activityAnimation = UIActivityIndicatorView(frame: rectangularFrame)
-        activityAnimation.startAnimating()
+    init(){
+        loadingAlert = UIAlertController(title: nil, message: "Please Wait", preferredStyle: .alert)
+        spinner = UIActivityIndicatorView(frame: CGRect(x: 48, y: 32, width: 0, height: 0))
+        loadingAlert.view.addSubview(spinner)
+        spinner.startAnimating()
     }
-    
-    func addLoader(onto superview: UIView) {
-        superview.addSubview(self.frozenBackgroundView)
-        superview.addSubview(self.activityAnimation)
-    }
-    
-    func removeLoader() {
-        self.activityAnimation.removeFromSuperview()
-        self.frozenBackgroundView.removeFromSuperview()
-    }
+
 }
