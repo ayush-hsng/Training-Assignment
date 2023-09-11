@@ -15,9 +15,6 @@ import UIKit
 class MovieArchiveViewController: UIViewController{
     
     @IBOutlet weak var archiveTableView: UITableView!
-    @IBOutlet weak var pageDescriptionLabel: UILabel!
-    @IBOutlet weak var prevPageButton: UIButton!
-    @IBOutlet weak var nextPageButton: UIButton!
     
     // Compositions
     var observerID: UUID!
@@ -40,53 +37,9 @@ class MovieArchiveViewController: UIViewController{
     }
     
     //Action Outlets
-    
-    
-    @IBAction func prevPageButtonTapped(_ sender: UIButton) {
-        present(loader.loadingAlert,animated: true)
-        self.disablePageControllers()
-        viewDataModel.gotoPrevPage()
-    }
-    
-    @IBAction func nextPageButtonTapped(_ sender: UIButton) {
-        present(loader.loadingAlert,animated: true)
-        self.disablePageControllers()
-        viewDataModel.gotoNextPage()
-    }
-    
     func loadContent() {
         present(loader.loadingAlert,animated: true)
-        self.disablePageControllers()
-        self.viewDataModel.fetchPopularMovies()
-    }
-    
-    func loadPage() {
-        self.archiveTableView.reloadData()
-        self.scrollToTop()
-        self.pageDescriptionLabel.text = String(self.viewDataModel.currentPage)
-        self.enablePageControllers(currentPage: self.viewDataModel.currentPage, lastPage: self.viewDataModel.lastPage)
-    }
-    
-    func scrollToTop(){
-        let topRow = IndexPath(row: 0, section: 0)
-        self.archiveTableView.scrollToRow(at: topRow,at: .top,animated: false)
-    }
-    
-    // Page Control Methods
-    
-    func disablePageControllers(){
-        self.pageDescriptionLabel.text = ""
-        prevPageButton.isEnabled = false
-        nextPageButton.isEnabled = false
-    }
-    
-    func enablePageControllers(currentPage: Int, lastPage: Int){
-        if currentPage > 1 {
-            prevPageButton.isEnabled = true
-        }
-        if currentPage < lastPage {
-            nextPageButton.isEnabled = true
-        }
+        self.viewDataModel.loadNextPage()
     }
     
     //Segue Method
@@ -128,6 +81,18 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
         performSegue(withIdentifier: "CheckMovieSegue", sender: sender)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastRowIndex = self.archiveTableView.numberOfRows(inSection: indexPath.section) - 1
+        if indexPath.row == lastRowIndex {
+            let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: cell.bounds.height))
+            spinner.startAnimating()
+            self.archiveTableView.tableFooterView = spinner
+            self.archiveTableView.tableFooterView?.isHidden = false
+            self.viewDataModel.loadNextPage()
+        }
+    }
+    
 }
 
 extension MovieArchiveViewController: IndetifiableObserver {
@@ -135,7 +100,7 @@ extension MovieArchiveViewController: IndetifiableObserver {
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
             
-            self.loadPage()
+            self.archiveTableView.reloadData()
             
             self.loader.loadingAlert.dismiss(animated: true)
         }

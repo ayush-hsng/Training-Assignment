@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="p9U-Ns-2yU">
-                                <rect key="frame" x="0.0" y="103" width="393" height="675"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArchiveCell" rowHeight="127" id="MOZ-Gh-a5d" customClass="MoviesTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
@@ -68,53 +68,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdm-af-8hW">
-                                <rect key="frame" x="0.0" y="778" width="393" height="40"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o4B-TJ-Lo5">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="uKW-GJ-5Ue"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Prev"/>
-                                        <connections>
-                                            <action selector="prevPageButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZCe-rE-Mnr"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeV-iM-szp">
-                                        <rect key="frame" x="80" y="0.0" width="233" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T72-K6-xbZ">
-                                        <rect key="frame" x="313" y="0.0" width="80" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="zMG-wT-LEQ"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Next"/>
-                                        <connections>
-                                            <action selector="nextPageButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FXQ-E4-H1X"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="zTv-Pl-nPg"/>
-                                </constraints>
-                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fdm-af-8hW" firstAttribute="top" secondItem="p9U-Ns-2yU" secondAttribute="bottom" id="AxU-Qk-3V7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p9U-Ns-2yU" secondAttribute="trailing" id="BRF-1M-oKf"/>
                             <constraint firstItem="p9U-Ns-2yU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="D4m-wo-6tV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fdm-af-8hW" secondAttribute="trailing" id="HPM-Zc-mx0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="p9U-Ns-2yU" secondAttribute="bottom" id="axU-lT-VK8"/>
                             <constraint firstItem="p9U-Ns-2yU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="k8S-MZ-Qs3"/>
-                            <constraint firstItem="fdm-af-8hW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pqt-vS-5GQ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fdm-af-8hW" secondAttribute="bottom" id="t0t-AJ-6ye"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2lD-za-nkF">
@@ -126,9 +87,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="archiveTableView" destination="p9U-Ns-2yU" id="ud9-py-eZA"/>
-                        <outlet property="nextPageButton" destination="T72-K6-xbZ" id="NaV-4C-n45"/>
-                        <outlet property="pageDescriptionLabel" destination="DeV-iM-szp" id="eT4-7X-GN4"/>
-                        <outlet property="prevPageButton" destination="o4B-TJ-Lo5" id="zpV-8f-rhA"/>
                         <segue destination="beE-c1-eQc" kind="show" identifier="CheckMovieSegue" id="9aW-Dw-XuU"/>
                     </connections>
                 </viewController>
@@ -163,7 +121,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gfM-ir-oVC">
-                                <rect key="frame" x="0.0" y="137.33333333333331" width="393" height="646.33333333333348"/>
+                                <rect key="frame" x="0.0" y="137.33333333333331" width="393" height="680.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="152" id="WlM-fi-ny4" customClass="MoviesTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
@@ -213,60 +171,21 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WFw-ob-aPh">
-                                <rect key="frame" x="0.0" y="783.66666666666663" width="393" height="34.333333333333371"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEF-Qb-d1L">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="34.333333333333336"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="DI8-wD-HXa"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Prev"/>
-                                        <connections>
-                                            <action selector="gotoPrevPageButtonTapped:" destination="e4e-l9-ybe" eventType="touchUpInside" id="dnA-Up-TeX"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2E-MM-WMo">
-                                        <rect key="frame" x="80" y="0.0" width="233" height="34.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7uQ-ED-cpk">
-                                        <rect key="frame" x="313" y="0.0" width="80" height="34.333333333333336"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="NLq-BO-Lka"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Next"/>
-                                        <connections>
-                                            <action selector="gotoNextPageButtonTapped:" destination="e4e-l9-ybe" eventType="touchUpInside" id="V2X-kV-1j0"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UVK-Sm-MGA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="UVK-Sm-MGA" firstAttribute="bottom" secondItem="gfM-ir-oVC" secondAttribute="bottom" id="3ez-GU-LD3"/>
                             <constraint firstItem="3a7-pf-9sT" firstAttribute="top" secondItem="UVK-Sm-MGA" secondAttribute="top" id="9PF-qe-zYc"/>
-                            <constraint firstItem="UVK-Sm-MGA" firstAttribute="bottom" secondItem="WFw-ob-aPh" secondAttribute="bottom" id="CD8-aB-O0C"/>
-                            <constraint firstItem="WFw-ob-aPh" firstAttribute="leading" secondItem="UVK-Sm-MGA" secondAttribute="leading" id="FUJ-5h-9on"/>
-                            <constraint firstItem="WFw-ob-aPh" firstAttribute="top" secondItem="gfM-ir-oVC" secondAttribute="bottom" id="Gcz-TJ-zlw"/>
                             <constraint firstItem="UVK-Sm-MGA" firstAttribute="trailing" secondItem="3a7-pf-9sT" secondAttribute="trailing" id="Yyp-yF-qz2"/>
                             <constraint firstItem="UVK-Sm-MGA" firstAttribute="trailing" secondItem="gfM-ir-oVC" secondAttribute="trailing" id="eRK-tx-sML"/>
                             <constraint firstItem="gfM-ir-oVC" firstAttribute="leading" secondItem="UVK-Sm-MGA" secondAttribute="leading" id="iqE-Sw-VXE"/>
                             <constraint firstItem="3a7-pf-9sT" firstAttribute="leading" secondItem="UVK-Sm-MGA" secondAttribute="leading" id="kg3-Kf-CR8"/>
-                            <constraint firstItem="UVK-Sm-MGA" firstAttribute="trailing" secondItem="WFw-ob-aPh" secondAttribute="trailing" id="mxh-Yx-wJf"/>
                             <constraint firstItem="gfM-ir-oVC" firstAttribute="top" secondItem="3a7-pf-9sT" secondAttribute="bottom" id="uRB-bD-Vcg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dq1-AQ-V0g"/>
                     <connections>
-                        <outlet property="nextPageButton" destination="7uQ-ED-cpk" id="tN0-2i-TDq"/>
-                        <outlet property="pageDescriptionLabel" destination="J2E-MM-WMo" id="El4-BG-UjN"/>
-                        <outlet property="prevPageButton" destination="ZEF-Qb-d1L" id="ICo-yU-g7A"/>
                         <outlet property="searchResultsTableView" destination="gfM-ir-oVC" id="Gms-aX-NLd"/>
                         <outlet property="searchTitleTextField" destination="re3-Do-aE8" id="dxd-CQ-Ms4"/>
                         <segue destination="beE-c1-eQc" kind="show" identifier="CheckMovieSegue" id="uSB-4v-laM"/>

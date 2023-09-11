@@ -15,49 +15,39 @@ import UIKit
 
 class MovieArchiveViewDataModel: Observable{
     var observers = [UUID: Observer]()
-    var currentPage: Int = 1
+    var loadedPage: Int = 0
     var lastPage: Int!
-    var popularMoviesResults: PopularMovieResult!
-//    var moviesWithTitleResults: MovieSearchResult!
+    var popularMoviesInfo = [APIMovie]()
     var movies = [MoviesCellDataModel]()
     
     //dependency
     var dataManager: PopularMoviesAPIHandler = DataManager.shared
+    var popularMoviesResults: PopularMovieResult!
     
-    func fetchPopularMovies(fromHome: Bool = false){
-        if fromHome {
-            self.currentPage = 1
-        }
-        dataManager.requestPopularMovies(byPage: currentPage, fromAPI: API_POPULAR_MOVIES_URL_STRING){ (apiResponse) in
+    func loadNextPage(){
+        dataManager.requestPopularMovies(byPage: loadedPage + 1, fromAPI: API_POPULAR_MOVIES_URL_STRING){ (apiResponse) in
             if let response = apiResponse {
+                self.loadedPage += 1
                 self.popularMoviesResults = response
                 self.processPopularMoviesResults()
                 self.notifyObservers()
             }
         }
     }
-    
 
-    
-    func gotoPrevPage() {
-        currentPage -= 1
-        fetchPopularMovies()
-    }
-    
-    func gotoNextPage() {
-        currentPage += 1
-        fetchPopularMovies()
-    }
-    
     func processPopularMoviesResults(){
-        movies = popularMoviesResults.results.map() { MoviesCellDataModel(movieInfo: $0) }
+        
+        let movieLoaded = popularMoviesResults.results.map() { MoviesCellDataModel(movieInfo: $0) }
+        
+        movies.append(contentsOf: movieLoaded)
+        popularMoviesInfo.append(contentsOf: popularMoviesResults.results)
         lastPage = popularMoviesResults.total_pages
     }
     
     //Getter Methods
     
     func getMovieData(ofIndex index: Int) -> APIMovie {
-        return popularMoviesResults.results[index]
+        return popularMoviesInfo[index]
     }
     
     func getMovieInfo(ofIndex index: Int) -> MoviesCellDataModel{

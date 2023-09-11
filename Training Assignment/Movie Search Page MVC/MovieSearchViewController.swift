@@ -10,10 +10,6 @@ import UIKit
 class MovieSearchViewController: UIViewController {
     @IBOutlet weak var searchTitleTextField: UITextField!
     @IBOutlet weak var searchResultsTableView: UITableView!
-    @IBOutlet weak var pageDescriptionLabel: UILabel!
-    @IBOutlet weak var prevPageButton: UIButton!
-    @IBOutlet weak var nextPageButton: UIButton!
-    
     var observerID: UUID!
     var loader: Loader!
     var viewDataModel: MovieSearchViewDataModel!
@@ -33,44 +29,9 @@ class MovieSearchViewController: UIViewController {
     
     @IBAction func searchMovieButtonTapped(_ sender: UIButton) {
         present(loader.loadingAlert,animated: true)
-        self.viewDataModel.fetchMovisWithTitle(title: self.searchTitleTextField.text ?? "")
+        self.viewDataModel.loadNextPage(for: self.searchTitleTextField.text ?? "")
     }
-    @IBAction func gotoPrevPageButtonTapped(_ sender: UIButton) {
-        present(loader.loadingAlert,animated: true)
-        self.viewDataModel.gotoPrevPage()
-    }
-    @IBAction func gotoNextPageButtonTapped(_ sender: UIButton) {
-        present(loader.loadingAlert,animated: true)
-        self.viewDataModel.gotoNextPage()
-    }
-    
-    func scrollToTop(){
-        let topRow = IndexPath(row: 0, section: 0)
-        self.searchResultsTableView.scrollToRow(at: topRow,at: .top,animated: false)
-    }
-    
-    func loadPage() {
-        self.searchResultsTableView.reloadData()
-        self.scrollToTop()
-        self.pageDescriptionLabel.text = String(self.viewDataModel.currentPage)
-        self.enablePageControllers(currentPage: self.viewDataModel.currentPage, lastPage: self.viewDataModel.lastPage)
-    }
-    
-    func disablePageControllers(){
-        self.pageDescriptionLabel.text = ""
-        prevPageButton.isEnabled = false
-        nextPageButton.isEnabled = false
-    }
-    
-    func enablePageControllers(currentPage: Int, lastPage: Int){
-        if currentPage > 1 {
-            prevPageButton.isEnabled = true
-        }
-        if currentPage < lastPage {
-            nextPageButton.isEnabled = true
-        }
-    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CheckMovieSegue" {
             if let destinationVC = segue.destination as? MovieDetailsViewController {
@@ -109,6 +70,18 @@ extension MovieSearchViewController: UITableViewDataSource, UITableViewDelegate,
         performSegue(withIdentifier: "CheckMovieSegue", sender: sender)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastRowIndex = tableView.numberOfRows(inSection: indexPath.section) - 1
+        if indexPath.row == lastRowIndex {
+            let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: cell.bounds.height))
+            spinner.startAnimating()
+            tableView.tableFooterView = spinner
+            tableView.tableFooterView?.isHidden = false
+            self.viewDataModel.loadNextPage(for: self.searchTitleTextField.text ?? "")        }
+    }
+    
 }
 
 extension MovieSearchViewController: IndetifiableObserver {
@@ -116,7 +89,7 @@ extension MovieSearchViewController: IndetifiableObserver {
     func notifyMeWhenDone() {
         DispatchQueue.main.async {
             
-            self.loadPage()
+            self.searchResultsTableView.reloadData()
             self.loader.loadingAlert.dismiss(animated: true)
         }
     }

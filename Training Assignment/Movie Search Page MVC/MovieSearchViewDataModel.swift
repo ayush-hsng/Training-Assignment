@@ -10,7 +10,9 @@ import Foundation
 class MovieSearchViewDataModel: Observable {
     var observers: [UUID : Observer] = [UUID: Observer]()
     var searchMovieResults: MovieSearchResult!
+    var searchMoviesInfo = [APIMovie]()
     var movies: [MoviesCellDataModel] = [MoviesCellDataModel]()
+    var loadedPage: Int = 0
     var currentPage: Int = 1
     var lastPage: Int!
     var searchText: String!
@@ -18,36 +20,27 @@ class MovieSearchViewDataModel: Observable {
     //dependency
     var dataManager: SearchMovieAPIHandler = DataManager.shared
     
-    func fetchMovisWithTitle(title: String) {
-        self.searchText = title
-        dataManager.requestMovieWithTitle(withTitle: title,byPage: currentPage ,fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
+    func loadNextPage(for title: String){
+        dataManager.requestMovieWithTitle(withTitle: title, byPage: loadedPage + 1, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
+                self.loadedPage += 1
                 self.searchMovieResults = response
                 self.processMoviesWithTitleResults()
                 self.notifyObservers()
             }
         }
-        
-    }
-
-    func gotoPrevPage() {
-        self.currentPage -= 1
-        self.fetchMovisWithTitle(title: self.searchText)
-    }
-    
-    func gotoNextPage() {
-        self.currentPage += 1
-        self.fetchMovisWithTitle(title: self.searchText)
     }
     
     func processMoviesWithTitleResults() {
-        self.movies = self.searchMovieResults.results.map() { MoviesCellDataModel(movieInfo: $0) }
-        self.currentPage = self.searchMovieResults.page
+        let movieLoaded = self.searchMovieResults.results.map() { MoviesCellDataModel(movieInfo: $0) }
+        
+        searchMoviesInfo.append(contentsOf: searchMovieResults.results)
+        movies.append(contentsOf: movieLoaded)
         self.lastPage = self.searchMovieResults.total_pages
     }
     
     func getMovieData(ofIndex index: Int) -> APIMovie {
-        return searchMovieResults.results[index]
+        return searchMoviesInfo[index]
     }
     
     func getMovieInfo(ofIndex index: Int) -> MoviesCellDataModel{
