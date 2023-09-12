@@ -20,10 +20,10 @@ class MovieSearchViewDataModel: Observable {
     //dependency
     var dataManager: SearchMovieAPIHandler = DataManager.shared
     
-    func loadNextPage(for title: String){
-        dataManager.requestMovieWithTitle(withTitle: title, byPage: loadedPage + 1, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
+    func searchMovie(with title: String){
+        dataManager.requestMovieWithTitle(withTitle: title, byPage: 1, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
-                self.loadedPage += 1
+                self.loadedPage = 1
                 self.searchMovieResults = response
                 self.processMoviesWithTitleResults()
                 self.notifyObservers()
@@ -31,9 +31,25 @@ class MovieSearchViewDataModel: Observable {
         }
     }
     
+    func loadNextPage(for title: String){
+        dataManager.requestMovieWithTitle(withTitle: title, byPage: loadedPage + 1, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
+            if let response = apiResponse {
+                self.loadedPage += 1
+                self.searchMovieResults = response
+                self.processLoadedResults()
+                self.notifyObservers()
+            }
+        }
+    }
+    
     func processMoviesWithTitleResults() {
+        searchMoviesInfo = searchMovieResults.results
+        movies = self.searchMovieResults.results.map() { MoviesCellDataModel(movieInfo: $0) }
+        self.lastPage = self.searchMovieResults.total_pages
+    }
+    
+    func processLoadedResults(){
         let movieLoaded = self.searchMovieResults.results.map() { MoviesCellDataModel(movieInfo: $0) }
-        
         searchMoviesInfo.append(contentsOf: searchMovieResults.results)
         movies.append(contentsOf: movieLoaded)
         self.lastPage = self.searchMovieResults.total_pages

@@ -8,8 +8,9 @@
 import UIKit
 
 class MovieSearchViewController: UIViewController {
-    @IBOutlet weak var searchTitleTextField: UITextField!
     @IBOutlet weak var searchResultsTableView: UITableView!
+    @IBOutlet weak var movieTitleSearchBar: UISearchBar!
+    
     var observerID: UUID!
     var loader: Loader!
     var viewDataModel: MovieSearchViewDataModel!
@@ -19,7 +20,7 @@ class MovieSearchViewController: UIViewController {
         
         self.searchResultsTableView.dataSource = self
         self.searchResultsTableView.delegate = self
-        
+        self.movieTitleSearchBar.delegate = self
         self.loader = Loader()
         self.viewDataModel = MovieSearchViewDataModel()
         self.observerID = self.viewDataModel.subscribe(observer: self)
@@ -27,10 +28,10 @@ class MovieSearchViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func searchMovieButtonTapped(_ sender: UIButton) {
-        present(loader.loadingAlert,animated: true)
-        self.viewDataModel.loadNextPage(for: self.searchTitleTextField.text ?? "")
-    }
+//    @IBAction func searchMovieButtonTapped(_ sender: UIButton) {
+//        present(loader.loadingAlert,animated: true)
+//        self.viewDataModel.loadNextPage(for: self.searchTitleTextField.text ?? "")
+//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CheckMovieSegue" {
@@ -44,6 +45,17 @@ class MovieSearchViewController: UIViewController {
 
 }
 
+extension MovieSearchViewController: UISearchBarDelegate {
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.dismiss(animated: true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        present(loader.loadingAlert,animated: true)
+        self.viewDataModel.searchMovie(with: searchBar.text ?? "")
+    }
+}
 
 extension MovieSearchViewController: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate   {
 
@@ -79,7 +91,7 @@ extension MovieSearchViewController: UITableViewDataSource, UITableViewDelegate,
             spinner.startAnimating()
             tableView.tableFooterView = spinner
             tableView.tableFooterView?.isHidden = false
-            self.viewDataModel.loadNextPage(for: self.searchTitleTextField.text ?? "")
+            self.viewDataModel.loadNextPage(for: self.movieTitleSearchBar.text ?? "")
             
         }else {
             self.searchResultsTableView.tableFooterView = nil
