@@ -13,7 +13,7 @@
 import Foundation
 import UIKit
 
-class MovieArchiveViewDataModel: Observable{
+class MovieArchiveViewDataModel: Observable, MovieTableViewDataModelProtocol, PageControlHandler{
     var observers = [UUID: Observer]()
     var loadedPage: Int = 0
     var lastPage: Int!
@@ -33,6 +33,10 @@ class MovieArchiveViewDataModel: Observable{
                 self.notifyAllObservers()
             }
         }
+    }
+    
+    func loadedLastPage() -> Bool {
+        return self.loadedPage == self.lastPage
     }
 
     func processPopularMoviesResults(){
@@ -58,9 +62,6 @@ class MovieArchiveViewDataModel: Observable{
         return movies.count
     }
     
-    func hasLoadablePage() -> Bool {
-        return loadedPage < lastPage
-    }
     
     // Observable Protocol methoods
     

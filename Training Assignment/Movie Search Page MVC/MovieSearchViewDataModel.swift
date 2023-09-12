@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieSearchViewDataModel: Observable {
+class MovieSearchViewDataModel: Observable, MovieTableViewDataModelProtocol, PageControlHandler {
     var observers: [UUID : Observer] = [UUID: Observer]()
     var searchMovieResults: MovieSearchResult!
     var searchMoviesInfo = [APIMovie]()
@@ -21,22 +21,12 @@ class MovieSearchViewDataModel: Observable {
     var dataManager: SearchMovieAPIHandler = DataManager.shared
     
     func searchMovie(with title: String){
+        self.searchText = title
         dataManager.requestMovieWithTitle(withTitle: title, byPage: 1, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
                 self.loadedPage = 1
                 self.searchMovieResults = response
                 self.processMoviesWithTitleResults()
-                self.notifyAllObservers()
-            }
-        }
-    }
-    
-    func loadNextPage(for title: String){
-        dataManager.requestMovieWithTitle(withTitle: title, byPage: loadedPage + 1, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
-            if let response = apiResponse {
-                self.loadedPage += 1
-                self.searchMovieResults = response
-                self.processLoadedResults()
                 self.notifyAllObservers()
             }
         }
@@ -48,12 +38,31 @@ class MovieSearchViewDataModel: Observable {
         self.lastPage = self.searchMovieResults.total_pages
     }
     
+    // Page Control Handler Methods
+    
+    func loadNextPage(){
+        dataManager.requestMovieWithTitle(withTitle: self.searchText, byPage: loadedPage + 1, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
+            if let response = apiResponse {
+                self.loadedPage += 1
+                self.searchMovieResults = response
+                self.processLoadedResults()
+                self.notifyAllObservers()
+            }
+        }
+    }
+    
+    func loadedLastPage() -> Bool {
+        return self.loadedPage == self.lastPage
+    }
+    
     func processLoadedResults(){
         let movieLoaded = self.searchMovieResults.results.map() { MoviesCellDataModel(movieInfo: $0) }
         searchMoviesInfo.append(contentsOf: searchMovieResults.results)
         movies.append(contentsOf: movieLoaded)
         self.lastPage = self.searchMovieResults.total_pages
     }
+    
+    // Getter for MovieTableViewDataModelProtocol
     
     func getMovieData(ofIndex index: Int) -> APIMovie {
         return searchMoviesInfo[index]
@@ -65,10 +74,6 @@ class MovieSearchViewDataModel: Observable {
     
     func getMovieCount() -> Int{
         return movies.count
-    }
-    
-    func hasLoadablePage() -> Bool {
-        return loadedPage < lastPage
     }
     
     func subscribe(observer: Observer) -> UUID {
