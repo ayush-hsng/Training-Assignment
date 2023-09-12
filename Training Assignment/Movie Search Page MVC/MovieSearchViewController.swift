@@ -28,11 +28,6 @@ class MovieSearchViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-//    @IBAction func searchMovieButtonTapped(_ sender: UIButton) {
-//        present(loader.loadingAlert,animated: true)
-//        self.viewDataModel.loadNextPage(for: self.searchTitleTextField.text ?? "")
-//    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CheckMovieSegue" {
             if let destinationVC = segue.destination as? MovieDetailsViewController {
@@ -98,9 +93,13 @@ extension MovieSearchViewController: UITableViewDataSource, UITableViewDelegate,
         }
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.movieTitleSearchBar.endEditing(true)
+    }
+    
 }
 
-extension MovieSearchViewController: IndetifiableObserver {
+extension MovieSearchViewController: Observer {
 
     func notifyMeWhenDone() {
         DispatchQueue.main.async {

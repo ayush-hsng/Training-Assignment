@@ -26,7 +26,7 @@ class MovieSearchViewDataModel: Observable {
                 self.loadedPage = 1
                 self.searchMovieResults = response
                 self.processMoviesWithTitleResults()
-                self.notifyObservers()
+                self.notifyAllObservers()
             }
         }
     }
@@ -37,7 +37,7 @@ class MovieSearchViewDataModel: Observable {
                 self.loadedPage += 1
                 self.searchMovieResults = response
                 self.processLoadedResults()
-                self.notifyObservers()
+                self.notifyAllObservers()
             }
         }
     }
@@ -77,12 +77,16 @@ class MovieSearchViewDataModel: Observable {
         return uuid
     }
     
-    func unsubscribe(id: UUID) {
-        self.observers.removeValue(forKey: id)
+    func unsubscribe(observer: Observer) {
+        self.observers.removeValue(forKey: observer.observerID)
     }
     
-    func notifyObservers() {
-        for observer in self.observers.values {
+    func notifyObserver(with observerID: UUID) {
+        observers[observerID]?.notifyMeWhenDone()
+    }
+    
+    func notifyAllObservers() {
+        for observer in observers.values {
             observer.notifyMeWhenDone()
         }
     }

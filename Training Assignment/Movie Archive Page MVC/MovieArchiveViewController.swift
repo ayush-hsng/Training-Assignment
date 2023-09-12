@@ -97,7 +97,7 @@ extension MovieArchiveViewController: UITableViewDataSource, UITableViewDelegate
     
 }
 
-extension MovieArchiveViewController: IndetifiableObserver {
+extension MovieArchiveViewController: Observer {
     
     func notifyMeWhenDone() {
         DispatchQueue.main.async {

@@ -30,7 +30,7 @@ class MovieArchiveViewDataModel: Observable{
                 self.loadedPage += 1
                 self.popularMoviesResults = response
                 self.processPopularMoviesResults()
-                self.notifyObservers()
+                self.notifyAllObservers()
             }
         }
     }
@@ -70,11 +70,15 @@ class MovieArchiveViewDataModel: Observable{
         return observerID
     }
     
-    func unsubscribe(id: UUID) {
-        self.observers.removeValue(forKey: id)
+    func unsubscribe(observer: Observer) {
+        self.observers.removeValue(forKey: observer.observerID)
     }
     
-    func notifyObservers() {
+    func notifyObserver(with observerID: UUID) {
+        observers[observerID]?.notifyMeWhenDone()
+    }
+    
+    func notifyAllObservers() {
         for observer in observers.values {
             observer.notifyMeWhenDone()
         }

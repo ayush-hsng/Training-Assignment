@@ -48,11 +48,11 @@ class MovieDetailsViewDataModel: Observable{
     func setPoster(){
         if self.movieInfo.posterImagePath.isEmpty {
             self.moviePoster = ImageManager.shared.getPlaceholderImage()
-            self.notifyObservers()
+            self.notifyAllObservers()
         }else {
             ImageManager.shared.loadImage(from: Helper.getImageUrlFrom(moviePoster: movieInfo.posterImagePath)) { (image) in
                 self.moviePoster = image
-                self.notifyObservers()
+                self.notifyAllObservers()
             }
         }
     }
@@ -97,11 +97,15 @@ class MovieDetailsViewDataModel: Observable{
         return observerID
     }
     
-    func unsubscribe(id: UUID) {
-        self.observers.removeValue(forKey: id)
+    func unsubscribe(observer: Observer) {
+        self.observers.removeValue(forKey: observer.observerID)
     }
     
-    func notifyObservers() {
+    func notifyObserver(with observerID: UUID) {
+        observers[observerID]?.notifyMeWhenDone()
+    }
+    
+    func notifyAllObservers() {
         for observer in observers.values {
             observer.notifyMeWhenDone()
         }
