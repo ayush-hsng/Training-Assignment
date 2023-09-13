@@ -8,19 +8,7 @@
 import Foundation
 import UIKit
 
-protocol MovieTableViewDataModelProtocol {
-    var lastPage: Int! { get set }
-    var loadedPage: Int { get set }
-    
-    func getMovieCount() -> Int
-    func getMovieInfo(ofIndex index: Int) -> MoviesCellDataModel
-    func getMovieData(ofIndex index: Int) -> APIMovie
-}
 
-protocol PageControlHandler {
-    func loadNextPage()
-    func loadedLastPage() -> Bool
-}
 
 class MovieTableViewDataSource: NSObject, UITableViewDataSource {
     
@@ -67,19 +55,16 @@ class MovieTableViewDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if tableView.tableFooterView != nil {
-            if self.pageControlManager.loadedLastPage() {
-                tableView.tableFooterView = nil
-            }
-        }else {
-            let lastRowIndex = tableView.numberOfRows(inSection: indexPath.section) - 1
-            if (indexPath.row == lastRowIndex){
+        if self.pageControlManager.loadedLastPage() {
+            tableView.tableFooterView = nil
+        }else if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            if tableView.tableFooterView == nil {
                 let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: cell.bounds.height))
                 spinner.startAnimating()
                 tableView.tableFooterView = spinner
                 tableView.tableFooterView?.isHidden = false
-                self.pageControlManager.loadNextPage()
             }
+            self.pageControlManager.loadNextPage()
         }
     }
 }

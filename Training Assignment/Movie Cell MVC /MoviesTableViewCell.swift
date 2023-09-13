@@ -37,8 +37,8 @@ class MoviesTableViewCell: UITableViewCell {
         self.movieTitleLabel.text = self.cellDataModel.getTitle()
         self.movieOverviewLabel.text = self.cellDataModel.getOverview()
         self.moviePosterImageView.image = imageLoader.getPlaceholderImage()
-        if !self.cellDataModel.getPosterFile().isEmpty {
-            imageLoader.loadImage(from: Helper.getImageUrlFrom(moviePoster: self.cellDataModel.posterImagePath)) { (image) in
+        if Helper.isValid(imageFile: self.cellDataModel.getPosterFile()) {
+            imageLoader.loadImage(from: Helper.getImageUrlFrom(moviePoster: self.cellDataModel.getPosterFile())) { (image) in
                 DispatchQueue.main.async {
                     self.moviePosterImageView.image = image
                 }

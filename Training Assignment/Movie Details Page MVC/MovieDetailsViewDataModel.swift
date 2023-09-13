@@ -12,7 +12,7 @@
 import Foundation
 import UIKit
 
-class MovieDetailsViewDataModel: Observable{
+class MovieDetailsViewDataModel: Observable, MovieDetailsViewDataModelProtocol{
     var observers: [UUID: Observer]
     
     class MovieInfo {
@@ -46,18 +46,18 @@ class MovieDetailsViewDataModel: Observable{
     //Setter Methods
     
     func setPoster(){
-        if self.movieInfo.posterImagePath.isEmpty {
-            self.moviePoster = ImageManager.shared.getPlaceholderImage()
-            self.notifyAllObservers()
-        }else {
+        if Helper.isValid(imageFile: self.movieInfo.posterImagePath) {
             ImageManager.shared.loadImage(from: Helper.getImageUrlFrom(moviePoster: movieInfo.posterImagePath)) { (image) in
                 self.moviePoster = image
                 self.notifyAllObservers()
             }
+        }else {
+            self.moviePoster = ImageManager.shared.getPlaceholderImage()
+            self.notifyAllObservers()
         }
     }
     
-    //Getter Methods
+    //Getter Methods for MovieDetailsViewDataModelProtocol
     
     func getTitle() -> String{
         return movieInfo.title
