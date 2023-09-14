@@ -13,20 +13,22 @@ class MovieSearchViewDataModel: Observable, MovieTableViewDataModelProtocol, Pag
     var searchMoviesInfo = [APIMovie]()
     var movies: [MoviesCellDataModel] = [MoviesCellDataModel]()
     var loadedPage: Int = 0
-    var currentPage: Int = 1
     var lastPage: Int!
     var searchText: String!
+    var loadingComplete: Bool = true
     
     //dependency
     var dataManager: SearchMovieAPIHandler = DataManager.shared
     
     func searchMovie(with title: String){
         self.searchText = title
+        loadingComplete = false
         dataManager.requestMovieWithTitle(withTitle: title, byPage: 1, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
                 self.loadedPage = 1
                 self.searchMovieResults = response
                 self.processMoviesWithTitleResults()
+                self.loadingComplete = true
                 self.notifyAllObservers()
             }
         }
@@ -41,14 +43,20 @@ class MovieSearchViewDataModel: Observable, MovieTableViewDataModelProtocol, Pag
     // Page Control Handler Methods
     
     func loadNextPage(){
+        loadingComplete = false
         dataManager.requestMovieWithTitle(withTitle: self.searchText, byPage: loadedPage + 1, fromAPI: API_SEARCH_MOVIES_URL_STRING) { (apiResponse) in
             if let response = apiResponse {
                 self.loadedPage += 1
                 self.searchMovieResults = response
                 self.processLoadedResults()
+                self.loadingComplete = true
                 self.notifyAllObservers()
             }
         }
+    }
+    
+    func isLoadingComplete() -> Bool {
+        return loadingComplete
     }
     
     func loadedLastPage() -> Bool {

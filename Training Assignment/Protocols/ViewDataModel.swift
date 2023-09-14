@@ -31,6 +31,7 @@ protocol PageControlHandler {
     
     func loadNextPage()
     func loadedLastPage() -> Bool
+    func isLoadingComplete() -> Bool
 }
 
 protocol MovieDetailsViewDataModelProtocol {

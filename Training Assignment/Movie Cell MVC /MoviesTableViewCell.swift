@@ -52,3 +52,4 @@ class MoviesTableViewCell: UITableViewCell {
         self.moviePosterImageView.layer.cornerRadius = cornerRadius
     }
 }
+

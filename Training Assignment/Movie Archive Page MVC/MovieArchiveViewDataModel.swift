@@ -19,20 +19,27 @@ class MovieArchiveViewDataModel: Observable, MovieTableViewDataModelProtocol, Pa
     var lastPage: Int!
     var popularMoviesInfo = [APIMovie]()
     var movies = [MoviesCellDataModel]()
+    var loadingComplete: Bool = true
     
     //dependency
     var dataManager: PopularMoviesAPIHandler = DataManager.shared
     var popularMoviesResults: PopularMovieResult!
     
     func loadNextPage(){
+        loadingComplete = false
         dataManager.requestPopularMovies(byPage: loadedPage + 1, fromAPI: API_POPULAR_MOVIES_URL_STRING){ (apiResponse) in
             if let response = apiResponse {
                 self.loadedPage += 1
                 self.popularMoviesResults = response
                 self.processPopularMoviesResults()
+                self.loadingComplete = true
                 self.notifyAllObservers()
             }
         }
+    }
+    
+    func isLoadingComplete() -> Bool {
+        return loadingComplete
     }
     
     func loadedLastPage() -> Bool {

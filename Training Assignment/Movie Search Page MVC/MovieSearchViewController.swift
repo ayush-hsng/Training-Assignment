@@ -36,6 +36,7 @@ class MovieSearchViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        movieTitleSearchBar.endEditing(true)
         if segue.identifier == "CheckMovieSegue" {
             if let destinationVC = segue.destination as? MovieDetailsViewController {
                 if let indexPath = sender as? IndexPath {

@@ -64,7 +64,9 @@ class MovieTableViewDelegate: NSObject, UITableViewDelegate {
                 tableView.tableFooterView = spinner
                 tableView.tableFooterView?.isHidden = false
             }
-            self.pageControlManager.loadNextPage()
+            if self.pageControlManager.isLoadingComplete() {
+                self.pageControlManager.loadNextPage()
+            }
         }
     }
 }

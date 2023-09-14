@@ -56,12 +56,14 @@ class DataManager: MovieDBAPIHandler, DataRequestHandler {
                             "language" : LANG_CODE,
                             "page" : String(page)]
         self.requestJsonData(from: urlString, using: queryList) { (data) in
-            if let jsonData = data {
-                let responseData = try? self.decoder.decode(PopularMovieResult.self, from: jsonData)
-                onCompletion(responseData)
-            }else {
+            guard let jsonData = data else {
                 onCompletion(nil)
+                return
             }
+            
+            let responseData = try? self.decoder.decode(PopularMovieResult.self, from: jsonData)
+            onCompletion(responseData)
+
         }
     }
     
@@ -71,12 +73,14 @@ class DataManager: MovieDBAPIHandler, DataRequestHandler {
                             "page" : "\(page)",
                             "query" : title]
         self.requestJsonData(from: urlString, using: queryList) { data in
-            if let jsonData = data {
-                let responseData = try? self.decoder.decode(MovieSearchResult.self, from: jsonData)
-                onCompletion(responseData)
-            }else {
+            guard let jsonData = data else {
                 onCompletion(nil)
+                return
             }
+            
+            let responseData = try? self.decoder.decode(MovieSearchResult.self, from: jsonData)
+            onCompletion(responseData)
+            
         }
         
     }

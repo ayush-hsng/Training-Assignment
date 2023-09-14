@@ -26,16 +26,20 @@ class ImageManager: ImageLoader, ImageCaheHandler {
     }
     
     func loadImage(from urlString: String, onCompletion: @escaping (UIImage) -> (Void)) {
-        guard let image = imageCache[urlString] else {
-            imageDataRequestHandler.requestImageData(from: urlString){ (image) in
-                if let image = image {
-                    self.imageCache[urlString] = image
-                }
-                onCompletion(self.getImage(from: image))
-            }
+        if let image = imageCache[urlString] {
+            onCompletion(image)
             return
         }
-        onCompletion(image)
+        
+        imageDataRequestHandler.requestImageData(from: urlString){ (image) in
+            if let image = image {
+                self.imageCache[urlString] = image
+                onCompletion(image)
+                return
+            }
+            
+            onCompletion(self.getPlaceholderImage())
+        }
     }
 
     func invalidateCache(){
@@ -48,13 +52,6 @@ class ImageManager: ImageLoader, ImageCaheHandler {
         return defaultImage
     }
     
-    func getImage(from optionalImage: UIImage? = nil) -> UIImage{
-        if let unwrappedImage = optionalImage {
-            return unwrappedImage
-        }else {
-            return self.getPlaceholderImage()
-        }
-    }
     
     deinit{
         self.invalidateCache()

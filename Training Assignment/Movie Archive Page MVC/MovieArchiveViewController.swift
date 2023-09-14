@@ -39,7 +39,6 @@ class MovieArchiveViewController: UIViewController{
         // Instantiating compositions
         self.loader = Loader()
         
-        
         self.loadContent()
     }
     
@@ -60,6 +59,8 @@ class MovieArchiveViewController: UIViewController{
             }
         }
     }
+    
+    
 
 }
 

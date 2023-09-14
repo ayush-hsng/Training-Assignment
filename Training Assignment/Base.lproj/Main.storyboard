@@ -20,15 +20,15 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="127" id="MOZ-Gh-a5d" customClass="MoviesTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="127" id="MOZ-Gh-a5d" customClass="MoviesTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MOZ-Gh-a5d" id="jGm-ii-Cjg">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="127"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="127"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Godzilla vs. Kong" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2u-Pg-oVl">
-                                                    <rect key="frame" x="92" y="19" width="273" height="31.333333333333329"/>
+                                                    <rect key="frame" x="91.999999999999986" y="19" width="254.66666666666663" height="31.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -41,7 +41,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JH6-wW-3ef">
-                                                    <rect key="frame" x="92" y="58.333333333333343" width="273" height="43"/>
+                                                    <rect key="frame" x="91.999999999999986" y="58.333333333333343" width="254.66666666666663" height="43"/>
                                                     <string key="text">In a city where fire, water, land and air residents live together, a fiery young woman and a go-with-the-flow guy will discover something elemental: how much they have in common.</string>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -106,11 +106,11 @@
                                 <rect key="frame" x="0.0" y="159" width="393" height="659"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="152" id="WlM-fi-ny4" customClass="MoviesTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="152" id="WlM-fi-ny4" customClass="MoviesTableViewCell" customModule="Training_Assignment" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="152"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WlM-fi-ny4" id="rX7-uW-EC9">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="152"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="152"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RWX-it-gRs">
@@ -121,13 +121,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XY1-c5-bE0">
-                                                    <rect key="frame" x="112" y="19" width="253" height="31.333333333333329"/>
+                                                    <rect key="frame" x="111.99999999999999" y="19" width="234.66666666666663" height="31.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4p-zK-vqD">
-                                                    <rect key="frame" x="112" y="58.333333333333336" width="253" height="21.666666666666664"/>
+                                                    <rect key="frame" x="111.99999999999999" y="58.333333333333336" width="234.66666666666663" height="21.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
